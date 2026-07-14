@@ -15,26 +15,28 @@
     <span class="brand-name" data-site-name style="margin-left:8px;">OC ARCHIVE</span>
   </a>
   <nav>
-    <a href="index.html">世界观总览</a>
     <a href="drabbles.html">短打</a>
+    <a href="characters.html">角色档案</a>
+    <a href="relations.html">角色关系</a>
+    <a href="stories.html" class="active">故事</a>
+    <a href="index.html">总世界观</a>
   </nav>
 </header>
 
-<div class="layout">
-  <main class="main">
-    <div class="breadcrumb" id="breadcrumb">
-      <span><a href="index.html">首页</a> / <a href="world.html?id=cosmos-mythos">黑泥的世界观</a> / 故事</span>
-    </div>
-    <div id="stories-root"></div>
-  </main>
-</div>
+<section class="hero">
+  <div class="eyebrow">STORY ARCS</div>
+  <h1>故事线目录</h1>
+  <p>点开任意一条故事线，查看它自己的角色档案、关系图与短打/故事。</p>
+</section>
+
+<main class="grid" id="stories-root"></main>
 
 <footer class="site-footer">OC ARCHIVE — 由你自己定义风格</footer>
 
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 <script>
-  renderStoriesPage(document.getElementById("stories-root"));
+  renderStoryArcCatalog(document.getElementById("stories-root"));
 </script>
 </body>
 </html>

@@ -37,9 +37,11 @@ const WORLDS = [
       "行星即是神将本源实体化后的巨大概念锚点，鲜明的灵魂因此能与黑泥对立、镇压少量污染。" +
       "这个世界真正讨论的主题不是『复活』，而是『未来』——已知无法创造未知，但无数已知的碰撞终将孕育未知，" +
       "文明存在的意义，就是不断创造未来。\n\n" +
-      "『宇宙学园·轮回大逃杀』与『现代四城·水潭病纪元』这两条故事线，都发生在这同一个世界观之下——" +
-      "前者是创世纪元的起点，后者是黑泥泄漏之后的现代。下方可以分别浏览角色档案、角色关系图和相关故事。",
+      "『如何创造太阳系』与『混杂很多的日常生活』这两条故事线，都发生在这同一个世界观之下——" +
+      "前者是创世纪元的起点，后者是黑泥泄漏之后的现代。顶部导航栏的『角色档案』『角色关系』『故事』可以分别浏览全部内容。",
     updatedAt: "2026-07-15",
+    illustration: "images/cosmos-illustration.jpg",
+    illustrationCredit: "配图：Dennis Ariel · Pexels（免费可商用）",
   },
   {
     id: "city-spade",
@@ -104,7 +106,7 @@ const STORY_ARCS = [
   {
     id: "reincarnation-academy",
     code: "A-001",
-    title: "宇宙学园 · 轮回大逃杀",
+    title: "如何创造太阳系",
     tagline: "醒来后你身处漂浮在黑暗中的校园，九天后要给出你的答案——而答案的排名，决定谁能离太阳更近。",
     summary:
       "融合了 Gnosia、人狼村、寒蝉、弹丸论破等作品要素的『缝合怪』故事。众人在漂浮于黑暗中的校园里醒来，" +
@@ -117,7 +119,7 @@ const STORY_ARCS = [
   {
     id: "modern-cities",
     code: "A-002",
-    title: "现代四城 · 水潭病纪元",
+    title: "混杂很多的日常生活",
     tagline: "被封存在地心的黑泥终于泄漏，城市里流行起一种叫『水潭病』的抑郁症——四个身份复杂的年轻人，正被卷入其中。",
     summary:
       "创世纪元落幕后，蓝色的人（地球的创造神）以『地球编辑器』般的双手持续塑造这颗行星，并以人类文明作为培养皿，" +
@@ -126,6 +128,51 @@ const STORY_ARCS = [
       "甚至有高中生成群坠楼。在这样的时代背景下，一支由人类、非人存在与实验体组成的『四人组』——" +
       "影蝶或、如月蜻蛉、雨宫黛、沙夏——各自带着秘密，生活在这座被污染笼罩的城市中。",
     updatedAt: "2026-07-15",
+  },
+  {
+    id: "tangled-consequences",
+    code: "A-003",
+    title: "纠缠的恶果",
+    tagline: "设定征集中……",
+    summary: "这条故事线还没有完整设定，目前只有一篇相关短篇，欢迎补充。",
+    updatedAt: "2026-07-15",
+    placeholder: true,
+  },
+  {
+    id: "demon-hunter",
+    code: "A-004",
+    title: "一位猎魔人的故事",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    placeholder: true,
+  },
+  {
+    id: "resurrection-horror",
+    code: "A-005",
+    title: "从复活开始恐怖无限流",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    placeholder: true,
+  },
+  {
+    id: "demon-company",
+    code: "A-006",
+    title: "恶魔公司",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    placeholder: true,
+  },
+  {
+    id: "shaxia-prequel",
+    code: "A-007",
+    title: "沙夏前传",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    placeholder: true,
   },
 ];
 
@@ -403,7 +450,7 @@ const STORIES = [
     id: "chuming-di-ji-ci-xinglai",
     storyArcId: "reincarnation-academy",
     type: "短打",
-    title: "第几次醒来了",
+    title: "再一次醒来",
     date: "2026-07-14",
     excerpt: "恢复意识后又是熟悉的课堂——初瞑试图想起，自己已经死过多少次了。",
     content:
@@ -429,7 +476,7 @@ const STORIES = [
   },
   {
     id: "huozhe-de-dingze",
-    storyArcId: "",
+    storyArcId: "tangled-consequences",
     type: "短篇",
     title: "在某一刻我学会了活在这个世界上",
     date: "2026-07-14",

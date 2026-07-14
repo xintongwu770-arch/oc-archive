@@ -112,46 +112,19 @@ function renderWorldDetail() {
     el("span", {}, [el("a", { href: "index.html", text: "首页" }), " / ", world.title])
   );
 
-  if (world.id === MAIN_WORLD_ID) {
-    // 主世界观：大banner + 三个分类入口
-    root.appendChild(
-      el("div", { class: "world-banner cosmic-block" }, [
-        el("div", { class: "world-banner-eyebrow", text: world.code || "" }),
-        el("h1", { text: world.title }),
-        el("p", { text: world.summary }),
-      ])
-    );
-    root.appendChild(
-      el("div", { class: "category-nav" }, [
-        el("a", { class: "category-btn cosmic-block", href: "characters.html" }, [
-          el("span", { class: "category-btn-title", text: "角色档案" }),
-          el("span", { class: "category-btn-desc", text: `${CHARACTERS.length} 位角色` }),
-        ]),
-        el("a", { class: "category-btn cosmic-block", href: "relations.html" }, [
-          el("span", { class: "category-btn-title", text: "角色关系" }),
-          el("span", { class: "category-btn-desc", text: `${STORY_ARCS.length} 张关系图` }),
-        ]),
-        el("a", { class: "category-btn cosmic-block", href: "stories.html" }, [
-          el("span", { class: "category-btn-title", text: "故事" }),
-          el("span", { class: "category-btn-desc", text: `${STORIES.length} 篇` }),
-        ]),
-      ])
-    );
-  } else {
-    // 地点性质小栏目：只展示简介
-    root.appendChild(
-      el("div", { class: "panel cosmic-block" }, [
-        el("div", { class: "panel-header" }, [
-          el("span", { class: "tag", text: world.code || "" }),
-          el("h2", { text: world.title }),
-        ]),
-        el("div", { class: "panel-body" }, [
-          el("p", { style: "color:var(--color-text-dim); margin:0 0 10px", text: world.tagline || "" }),
-          el("p", { style: "color:var(--color-text-dim); margin:0", text: world.summary }),
-        ]),
-      ])
-    );
+  // 统一展示：大banner + 简介，主世界观（cosmos-mythos）额外带插图
+  const bannerChildren = [
+    el("div", { class: "world-banner-eyebrow", text: world.code || "" }),
+    el("h1", { text: world.title }),
+  ];
+  if (world.illustration) {
+    bannerChildren.push(el("img", { class: "world-banner-illustration", src: world.illustration, alt: world.title }));
   }
+  bannerChildren.push(el("p", { text: world.summary }));
+  if (world.illustrationCredit) {
+    bannerChildren.push(el("div", { class: "world-banner-credit", text: world.illustrationCredit }));
+  }
+  root.appendChild(el("div", { class: "world-banner cosmic-block" }, bannerChildren));
 }
 
 /* ---------- 角色档案页（按故事线分组） ---------- */
@@ -238,50 +211,186 @@ function renderRelationsPage(container) {
   });
 }
 
-/* ---------- 故事页（故事线简介 + 全部故事/短打列表） ---------- */
-function renderStoriesPage(container) {
-  if (STORY_ARCS.length) {
-    const introWrap = el("div", { class: "arc-story-intros" });
-    STORY_ARCS.forEach((arc) => {
-      const count = storiesOfArc(arc.id).length;
-      introWrap.appendChild(
-        el("div", { class: "panel cosmic-block" }, [
-          el("div", { class: "panel-header" }, [
-            el("span", { class: "tag", text: arc.code || "" }),
-            el("h2", { text: arc.title }),
-          ]),
-          el("div", { class: "panel-body" }, [
-            el("p", { style: "color:var(--color-text-dim); margin:0 0 8px", text: arc.tagline || "" }),
-            el("p", { style: "color:var(--color-text-faint); font-size:12.5px; margin:0", text: `相关故事：${count} 篇` }),
-          ]),
-        ])
-      );
-    });
-    container.appendChild(introWrap);
-  }
-
-  if (STORIES.length === 0) {
+/* ---------- 故事目录页：按故事线列出卡片，点进去到 arc.html ---------- */
+function renderStoryArcCatalog(container) {
+  if (STORY_ARCS.length === 0) {
     container.appendChild(
       el("div", { class: "empty-state" }, [
-        el("div", { class: "empty-title", text: "还没有故事" }),
-        el("div", { text: "去 js/data.js 的 STORIES 数组里添加一条记录即可。" }),
+        el("div", { class: "empty-title", text: "还没有故事线" }),
+        el("div", { text: "去 js/data.js 的 STORY_ARCS 数组里添加一条记录即可。" }),
       ])
     );
     return;
   }
-  const list = el("div", { class: "story-list", style: "margin-top: var(--space-5)" });
-  STORIES.forEach((s) => {
-    const arc = arcById(s.storyArcId);
+  const grid = el("div", { class: "arc-story-intros" });
+  STORY_ARCS.forEach((arc) => {
+    const count = storiesOfArc(arc.id).length;
+    const charCount = charsOfArc(arc.id).length;
+    grid.appendChild(
+      el("a", { class: "world-card cosmic-block" + (arc.placeholder ? " world-card-placeholder" : ""), href: `arc.html?id=${arc.id}` }, [
+        el("div", { class: "world-id", text: arc.code || arc.id }),
+        el("h3", { text: arc.title }),
+        el("p", { text: arc.summary || arc.tagline || "" }),
+        el("div", { class: "world-meta" }, [
+          el("span", { text: `${charCount} 位角色 · ${count} 篇故事` }),
+          el("span", { text: `更新于 ${arc.updatedAt || "—"}` }),
+        ]),
+      ])
+    );
+  });
+  container.appendChild(grid);
+}
+
+/* ---------- 故事线详情页（banner + 三个分类入口） ---------- */
+function renderArcDetail() {
+  const id = qsParam("id");
+  const arc = arcById(id);
+  const root = document.getElementById("arc-root");
+  if (!arc) {
+    root.appendChild(
+      el("div", { class: "empty-state" }, [
+        el("div", { class: "empty-title", text: "没有找到这条故事线" }),
+      ])
+    );
+    return;
+  }
+  document.title = `${arc.title} · ${SITE.name}`;
+  document.getElementById("breadcrumb").appendChild(
+    el("span", {}, [el("a", { href: "index.html", text: "首页" }), " / ", el("a", { href: "stories.html", text: "故事" }), " / ", arc.title])
+  );
+
+  root.appendChild(
+    el("div", { class: "world-banner cosmic-block" }, [
+      el("div", { class: "world-banner-eyebrow", text: arc.code || "" }),
+      el("h1", { text: arc.title }),
+      el("p", { text: arc.summary }),
+    ])
+  );
+
+  const chars = charsOfArc(arc.id);
+  const relations = relationsOfArc(arc.id);
+  const stories = storiesOfArc(arc.id);
+  root.appendChild(
+    el("div", { class: "category-nav" }, [
+      el("a", { class: "category-btn cosmic-block", href: `arc-characters.html?id=${arc.id}` }, [
+        el("span", { class: "category-btn-title", text: "角色档案" }),
+        el("span", { class: "category-btn-desc", text: `${chars.length} 位角色` }),
+      ]),
+      el("a", { class: "category-btn cosmic-block", href: `arc-relations.html?id=${arc.id}` }, [
+        el("span", { class: "category-btn-title", text: "角色关系" }),
+        el("span", { class: "category-btn-desc", text: `${relations.length} 条关系` }),
+      ]),
+      el("a", { class: "category-btn cosmic-block", href: `arc-stories.html?id=${arc.id}` }, [
+        el("span", { class: "category-btn-title", text: "短打 / 故事" }),
+        el("span", { class: "category-btn-desc", text: `${stories.length} 篇` }),
+      ]),
+    ])
+  );
+}
+
+/* ---------- 故事线专属：角色档案子页 ---------- */
+function renderArcCharacters() {
+  const id = qsParam("id");
+  const arc = arcById(id);
+  const root = document.getElementById("arc-characters-root");
+  if (!arc) {
+    root.appendChild(el("div", { class: "empty-state" }, [el("div", { class: "empty-title", text: "没有找到这条故事线" })]));
+    return;
+  }
+  document.title = `角色档案 · ${arc.title} · ${SITE.name}`;
+  document.getElementById("breadcrumb").appendChild(
+    el("span", {}, [
+      el("a", { href: "index.html", text: "首页" }), " / ",
+      el("a", { href: "stories.html", text: "故事" }), " / ",
+      el("a", { href: `arc.html?id=${arc.id}`, text: arc.title }), " / ",
+      "角色档案",
+    ])
+  );
+  const chars = charsOfArc(arc.id);
+  if (chars.length === 0) {
+    root.appendChild(
+      el("div", { class: "empty-state" }, [
+        el("div", { class: "empty-title", text: "这条故事线还没有角色" }),
+        el("div", { text: "去 js/data.js 的 CHARACTERS 数组里添加，storyArcId 填这条故事线的 id。" }),
+      ])
+    );
+    return;
+  }
+  const grid = el("div", { class: "char-grid" });
+  chars.forEach((c) => {
+    grid.appendChild(
+      el("a", { class: "char-card cosmic-block", href: `character.html?id=${c.id}` }, [
+        el("div", { class: "char-portrait" }, c.portrait ? el("img", { src: c.portrait, alt: c.name }) : "肖像占位"),
+        el("div", { class: "char-info" }, [
+          el("div", { class: "char-name", text: c.name }),
+          el("div", { class: "char-role", text: c.role || "" }),
+        ]),
+      ])
+    );
+  });
+  root.appendChild(grid);
+}
+
+/* ---------- 故事线专属：角色关系图子页 ---------- */
+function renderArcRelations() {
+  const id = qsParam("id");
+  const arc = arcById(id);
+  const root = document.getElementById("arc-relations-root");
+  if (!arc) {
+    root.appendChild(el("div", { class: "empty-state" }, [el("div", { class: "empty-title", text: "没有找到这条故事线" })]));
+    return;
+  }
+  document.title = `角色关系 · ${arc.title} · ${SITE.name}`;
+  document.getElementById("breadcrumb").appendChild(
+    el("span", {}, [
+      el("a", { href: "index.html", text: "首页" }), " / ",
+      el("a", { href: "stories.html", text: "故事" }), " / ",
+      el("a", { href: `arc.html?id=${arc.id}`, text: arc.title }), " / ",
+      "角色关系",
+    ])
+  );
+  renderRelationGraph(root, charsOfArc(arc.id), relationsOfArc(arc.id));
+}
+
+/* ---------- 故事线专属：短打/故事子页 ---------- */
+function renderArcStories() {
+  const id = qsParam("id");
+  const arc = arcById(id);
+  const root = document.getElementById("arc-stories-root");
+  if (!arc) {
+    root.appendChild(el("div", { class: "empty-state" }, [el("div", { class: "empty-title", text: "没有找到这条故事线" })]));
+    return;
+  }
+  document.title = `故事 · ${arc.title} · ${SITE.name}`;
+  document.getElementById("breadcrumb").appendChild(
+    el("span", {}, [
+      el("a", { href: "index.html", text: "首页" }), " / ",
+      el("a", { href: "stories.html", text: "故事" }), " / ",
+      el("a", { href: `arc.html?id=${arc.id}`, text: arc.title }), " / ",
+      "短打 / 故事",
+    ])
+  );
+  const stories = storiesOfArc(arc.id);
+  if (stories.length === 0) {
+    root.appendChild(
+      el("div", { class: "empty-state" }, [
+        el("div", { class: "empty-title", text: "这条故事线还没有故事" }),
+        el("div", { text: "去 js/data.js 的 STORIES 数组里添加，storyArcId 填这条故事线的 id。" }),
+      ])
+    );
+    return;
+  }
+  const list = el("div", { class: "story-list" });
+  stories.forEach((s) => {
     list.appendChild(
       el("a", { class: "story-item", href: `story.html?id=${s.id}` }, [
         el("span", { class: "story-type", text: s.type }),
         el("span", { class: "story-title", text: s.title }),
-        el("span", { class: "story-arc", text: arc ? arc.title : "独立故事" }),
         el("span", { class: "story-date", text: s.date || "" }),
       ])
     );
   });
-  container.appendChild(list);
+  root.appendChild(list);
 }
 
 /* ---------- 角色关系图（简单力导向占位版：固定圆形布局 + 可拖拽） ---------- */
@@ -402,7 +511,7 @@ function renderCharacterDetail() {
       " / ",
       world ? el("a", { href: `world.html?id=${world.id}`, text: world.title }) : "未知世界观",
       " / ",
-      arc ? el("a", { href: "characters.html", text: arc.title }) : "未分类",
+      arc ? el("a", { href: `arc.html?id=${arc.id}`, text: arc.title }) : "未分类",
       " / ",
       c.name,
     ])
@@ -491,7 +600,7 @@ function renderStoryDetail() {
     el("span", {}, [
       el("a", { href: "index.html", text: "首页" }),
       " / ",
-      arc ? el("a", { href: "stories.html", text: arc.title }) : el("a", { href: "drabbles.html", text: "短打" }),
+      arc ? el("a", { href: `arc.html?id=${arc.id}`, text: arc.title }) : el("a", { href: "drabbles.html", text: "短打" }),
       " / ",
       s.title,
     ])
