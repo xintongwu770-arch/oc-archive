@@ -444,6 +444,7 @@ const CHARACTERS = [
     name: "沙夏",
     role: "逃亡的异能力者",
     portrait: "images/shaxia.jpg",
+    gallery: ["images/shaxia-2.jpg"],
     origin: "",
     quickFacts: [
       ["身份", "红桃市能力者实验的实验体"],
@@ -464,7 +465,7 @@ const CHARACTERS = [
     storyArcId: "resurrection-horror",
     name: "苏浮生",
     role: "下落不明的老玩家",
-    portrait: "",
+    portrait: "images/su-fusheng.jpg",
     origin: "",
     quickFacts: [
       ["身份", "副本通关排行较高的老玩家"],
