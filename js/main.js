@@ -21,9 +21,11 @@ function el(tag, attrs = {}, children = []) {
   return node;
 }
 function worldById(id) { return WORLDS.find((w) => w.id === id); }
+function arcById(id) { return STORY_ARCS.find((a) => a.id === id); }
 function charById(id) { return CHARACTERS.find((c) => c.id === id); }
-function charsOfWorld(worldId) { return CHARACTERS.filter((c) => c.worldId === worldId); }
-function storiesOfWorld(worldId) { return STORIES.filter((s) => s.worldId === worldId); }
+function charsOfArc(arcId) { return CHARACTERS.filter((c) => c.storyArcId === arcId); }
+function relationsOfArc(arcId) { return RELATIONS.filter((r) => r.storyArcId === arcId); }
+function storiesOfArc(arcId) { return STORIES.filter((s) => s.storyArcId === arcId); }
 
 /* ---------- 站点头部信息（每个页面都会调用） ---------- */
 function applySiteHeader() {
@@ -31,7 +33,29 @@ function applySiteHeader() {
   document.querySelectorAll("[data-site-subtitle]").forEach((n) => (n.textContent = SITE.subtitle));
 }
 
-/* ---------- 首页：世界观网格 ---------- */
+/* ---------- 宇宙风背景：随机分布的闪烁星点 ---------- */
+function renderStarfield() {
+  if (document.querySelector(".starfield")) return;
+  const field = document.createElement("div");
+  field.className = "starfield";
+  field.setAttribute("aria-hidden", "true");
+  const count = window.innerWidth < 640 ? 45 : 90;
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement("i");
+    star.className = "star";
+    const size = (Math.random() * 2 + 0.6).toFixed(2);
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.top = (Math.random() * 100).toFixed(2) + "%";
+    star.style.left = (Math.random() * 100).toFixed(2) + "%";
+    star.style.animationDuration = (Math.random() * 4 + 3).toFixed(2) + "s";
+    star.style.animationDelay = (Math.random() * -6).toFixed(2) + "s";
+    field.appendChild(star);
+  }
+  document.body.insertBefore(field, document.body.firstChild);
+}
+
+/* ---------- 首页：世界观 / 地点栏目网格 ---------- */
 function renderWorldGrid(container) {
   if (WORLDS.length === 0) {
     container.appendChild(
@@ -43,20 +67,32 @@ function renderWorldGrid(container) {
     return;
   }
   WORLDS.forEach((w) => {
-    const card = el("a", { class: "world-card", href: `world.html?id=${w.id}` }, [
-      el("div", { class: "world-id", text: w.code || w.id }),
-      el("h3", { text: w.title }),
-      el("p", { text: w.summary || w.tagline || "" }),
-      el("div", { class: "world-meta" }, [
-        el("span", { text: `${charsOfWorld(w.id).length} 位角色` }),
-        el("span", { text: `更新于 ${w.updatedAt || "—"}` }),
-      ]),
-    ]);
+    const isMain = w.id === MAIN_WORLD_ID;
+    const metaRight = isMain
+      ? `${CHARACTERS.length} 位角色 · ${STORY_ARCS.length} 条故事线`
+      : (w.placeholder ? "待补充" : "地点笔记");
+    const cardClass =
+      "world-card cosmic-block" +
+      (isMain ? " world-card-main" : "") +
+      (w.placeholder ? " world-card-placeholder" : "");
+    const card = el(
+      "a",
+      { class: cardClass, href: `world.html?id=${w.id}` },
+      [
+        el("div", { class: "world-id", text: w.code || w.id }),
+        el("h3", { text: w.title }),
+        el("p", { text: w.summary || w.tagline || "" }),
+        el("div", { class: "world-meta" }, [
+          el("span", { text: metaRight }),
+          el("span", { text: `更新于 ${w.updatedAt || "—"}` }),
+        ]),
+      ]
+    );
     container.appendChild(card);
   });
 }
 
-/* ---------- 世界观详情页 ---------- */
+/* ---------- 世界观 / 地点栏目详情页 ---------- */
 function renderWorldDetail() {
   const id = qsParam("id");
   const world = worldById(id);
@@ -64,7 +100,7 @@ function renderWorldDetail() {
   if (!world) {
     root.appendChild(
       el("div", { class: "empty-state" }, [
-        el("div", { class: "empty-title", text: "没有找到这个世界观" }),
+        el("div", { class: "empty-title", text: "没有找到这个栏目" }),
         el("div", { text: "检查一下链接里的 id，或者回首页看看。" }),
       ])
     );
@@ -76,60 +112,73 @@ function renderWorldDetail() {
     el("span", {}, [el("a", { href: "index.html", text: "首页" }), " / ", world.title])
   );
 
-  root.appendChild(
-    el("div", { class: "panel" }, [
-      el("div", { class: "panel-header" }, [
-        el("span", { class: "tag", text: world.code || "" }),
-        el("h2", { text: world.title }),
-      ]),
-      el("div", { class: "panel-body" }, [
-        el("p", { style: "color:var(--color-text-dim); margin:0", text: world.summary }),
-      ]),
-    ])
-  );
-
-  // tabs
-  const tabs = el("div", { class: "tabs" }, [
-    el("a", { href: "#chars", class: "active", "data-tab": "chars", text: "角色档案" }),
-    el("a", { href: "#relations", "data-tab": "relations", text: "角色关系图" }),
-    el("a", { href: "#stories", "data-tab": "stories", text: "相关故事" }),
-  ]);
-  root.appendChild(tabs);
-
-  const panes = {
-    chars: el("div", { id: "pane-chars" }),
-    relations: el("div", { id: "pane-relations", style: "display:none" }),
-    stories: el("div", { id: "pane-stories", style: "display:none" }),
-  };
-  root.appendChild(panes.chars);
-  root.appendChild(panes.relations);
-  root.appendChild(panes.stories);
-
-  tabs.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      tabs.querySelectorAll("a").forEach((x) => x.classList.remove("active"));
-      a.classList.add("active");
-      Object.entries(panes).forEach(([key, node]) => {
-        node.style.display = key === a.dataset.tab ? "" : "none";
-      });
-    });
-  });
-
-  // 角色档案 pane
-  const chars = charsOfWorld(world.id);
-  if (chars.length === 0) {
-    panes.chars.appendChild(
-      el("div", { class: "empty-state" }, [
-        el("div", { class: "empty-title", text: "这个世界观还没有角色" }),
-        el("div", { text: "去 js/data.js 的 CHARACTERS 数组里添加，worldId 填这个世界观的 id。" }),
+  if (world.id === MAIN_WORLD_ID) {
+    // 主世界观：大banner + 三个分类入口
+    root.appendChild(
+      el("div", { class: "world-banner cosmic-block" }, [
+        el("div", { class: "world-banner-eyebrow", text: world.code || "" }),
+        el("h1", { text: world.title }),
+        el("p", { text: world.summary }),
+      ])
+    );
+    root.appendChild(
+      el("div", { class: "category-nav" }, [
+        el("a", { class: "category-btn cosmic-block", href: "characters.html" }, [
+          el("span", { class: "category-btn-title", text: "角色档案" }),
+          el("span", { class: "category-btn-desc", text: `${CHARACTERS.length} 位角色` }),
+        ]),
+        el("a", { class: "category-btn cosmic-block", href: "relations.html" }, [
+          el("span", { class: "category-btn-title", text: "角色关系" }),
+          el("span", { class: "category-btn-desc", text: `${STORY_ARCS.length} 张关系图` }),
+        ]),
+        el("a", { class: "category-btn cosmic-block", href: "stories.html" }, [
+          el("span", { class: "category-btn-title", text: "故事" }),
+          el("span", { class: "category-btn-desc", text: `${STORIES.length} 篇` }),
+        ]),
       ])
     );
   } else {
+    // 地点性质小栏目：只展示简介
+    root.appendChild(
+      el("div", { class: "panel cosmic-block" }, [
+        el("div", { class: "panel-header" }, [
+          el("span", { class: "tag", text: world.code || "" }),
+          el("h2", { text: world.title }),
+        ]),
+        el("div", { class: "panel-body" }, [
+          el("p", { style: "color:var(--color-text-dim); margin:0 0 10px", text: world.tagline || "" }),
+          el("p", { style: "color:var(--color-text-dim); margin:0", text: world.summary }),
+        ]),
+      ])
+    );
+  }
+}
+
+/* ---------- 角色档案页（按故事线分组） ---------- */
+function renderCharacterArchive(container) {
+  if (CHARACTERS.length === 0) {
+    container.appendChild(
+      el("div", { class: "empty-state" }, [
+        el("div", { class: "empty-title", text: "还没有角色" }),
+        el("div", { text: "去 js/data.js 的 CHARACTERS 数组里添加，storyArcId 填对应故事线的 id。" }),
+      ])
+    );
+    return;
+  }
+  STORY_ARCS.forEach((arc) => {
+    const chars = charsOfArc(arc.id);
+    if (chars.length === 0) return;
+    const section = el("div", { class: "arc-section" });
+    section.appendChild(
+      el("div", { class: "arc-section-header" }, [
+        el("h2", { text: arc.title }),
+        el("p", { text: arc.tagline || "" }),
+      ])
+    );
     const grid = el("div", { class: "char-grid" });
     chars.forEach((c) => {
       grid.appendChild(
-        el("a", { class: "char-card", href: `character.html?id=${c.id}` }, [
+        el("a", { class: "char-card cosmic-block", href: `character.html?id=${c.id}` }, [
           el(
             "div",
             { class: "char-portrait" },
@@ -142,42 +191,102 @@ function renderWorldDetail() {
         ])
       );
     });
-    panes.chars.appendChild(grid);
-  }
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
 
-  // 关系图 pane
-  renderRelationGraph(panes.relations, world.id);
-
-  // 故事 pane
-  const stories = storiesOfWorld(world.id);
-  if (stories.length === 0) {
-    panes.stories.appendChild(
-      el("div", { class: "empty-state" }, [
-        el("div", { class: "empty-title", text: "还没有相关故事" }),
-        el("div", { text: "去 js/data.js 的 STORIES 数组里添加，worldId 填这个世界观的 id。" }),
-      ])
-    );
-  } else {
-    const list = el("div", { class: "story-list" });
-    stories.forEach((s) => {
-      list.appendChild(
-        el("a", { class: "story-item", href: `story.html?id=${s.id}` }, [
-          el("span", { class: "story-type", text: s.type }),
-          el("span", { class: "story-title", text: s.title }),
-          el("span", { class: "story-date", text: s.date || "" }),
+  const orphans = CHARACTERS.filter((c) => !arcById(c.storyArcId));
+  if (orphans.length) {
+    const section = el("div", { class: "arc-section" });
+    section.appendChild(el("div", { class: "arc-section-header" }, [el("h2", { text: "未分类" })]));
+    const grid = el("div", { class: "char-grid" });
+    orphans.forEach((c) => {
+      grid.appendChild(
+        el("a", { class: "char-card cosmic-block", href: `character.html?id=${c.id}` }, [
+          el(
+            "div",
+            { class: "char-portrait" },
+            c.portrait ? el("img", { src: c.portrait, alt: c.name }) : "肖像占位"
+          ),
+          el("div", { class: "char-info" }, [
+            el("div", { class: "char-name", text: c.name }),
+            el("div", { class: "char-role", text: c.role || "" }),
+          ]),
         ])
       );
     });
-    panes.stories.appendChild(list);
+    section.appendChild(grid);
+    container.appendChild(section);
   }
 }
 
-/* ---------- 角色关系图（简单力导向占位版：固定圆形布局 + 可拖拽） ---------- */
-function renderRelationGraph(container, worldId) {
-  const chars = charsOfWorld(worldId);
-  const relations = RELATIONS.filter((r) => r.worldId === worldId);
+/* ---------- 角色关系图页（每条故事线各一张图） ---------- */
+function renderRelationsPage(container) {
+  if (STORY_ARCS.length === 0) {
+    container.appendChild(
+      el("div", { class: "empty-state" }, [el("div", { class: "empty-title", text: "还没有故事线" })])
+    );
+    return;
+  }
+  STORY_ARCS.forEach((arc) => {
+    const chars = charsOfArc(arc.id);
+    if (chars.length === 0) return;
+    const section = el("div", { class: "arc-section" });
+    section.appendChild(el("div", { class: "arc-section-header" }, [el("h2", { text: arc.title })]));
+    renderRelationGraph(section, chars, relationsOfArc(arc.id));
+    container.appendChild(section);
+  });
+}
 
-  if (chars.length === 0) {
+/* ---------- 故事页（故事线简介 + 全部故事/短打列表） ---------- */
+function renderStoriesPage(container) {
+  if (STORY_ARCS.length) {
+    const introWrap = el("div", { class: "arc-story-intros" });
+    STORY_ARCS.forEach((arc) => {
+      const count = storiesOfArc(arc.id).length;
+      introWrap.appendChild(
+        el("div", { class: "panel cosmic-block" }, [
+          el("div", { class: "panel-header" }, [
+            el("span", { class: "tag", text: arc.code || "" }),
+            el("h2", { text: arc.title }),
+          ]),
+          el("div", { class: "panel-body" }, [
+            el("p", { style: "color:var(--color-text-dim); margin:0 0 8px", text: arc.tagline || "" }),
+            el("p", { style: "color:var(--color-text-faint); font-size:12.5px; margin:0", text: `相关故事：${count} 篇` }),
+          ]),
+        ])
+      );
+    });
+    container.appendChild(introWrap);
+  }
+
+  if (STORIES.length === 0) {
+    container.appendChild(
+      el("div", { class: "empty-state" }, [
+        el("div", { class: "empty-title", text: "还没有故事" }),
+        el("div", { text: "去 js/data.js 的 STORIES 数组里添加一条记录即可。" }),
+      ])
+    );
+    return;
+  }
+  const list = el("div", { class: "story-list", style: "margin-top: var(--space-5)" });
+  STORIES.forEach((s) => {
+    const arc = arcById(s.storyArcId);
+    list.appendChild(
+      el("a", { class: "story-item", href: `story.html?id=${s.id}` }, [
+        el("span", { class: "story-type", text: s.type }),
+        el("span", { class: "story-title", text: s.title }),
+        el("span", { class: "story-arc", text: arc ? arc.title : "独立故事" }),
+        el("span", { class: "story-date", text: s.date || "" }),
+      ])
+    );
+  });
+  container.appendChild(list);
+}
+
+/* ---------- 角色关系图（简单力导向占位版：固定圆形布局 + 可拖拽） ---------- */
+function renderRelationGraph(container, chars, relations) {
+  if (!chars || chars.length === 0) {
     container.appendChild(
       el("div", { class: "empty-state" }, [
         el("div", { class: "empty-title", text: "暂无角色，无法生成关系图" }),
@@ -188,7 +297,7 @@ function renderRelationGraph(container, worldId) {
 
   const wrap = el("div", { class: "relation-canvas-wrap" });
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("id", "relation-svg");
+  svg.setAttribute("id", "relation-svg-" + Math.random().toString(36).slice(2));
   wrap.appendChild(svg);
   container.appendChild(wrap);
   container.appendChild(
@@ -238,7 +347,7 @@ function renderRelationGraph(container, worldId) {
       href: `character.html?id=${c.id}`,
       style: `left:${positions[c.id].x}%; top:${positions[c.id].y}%`,
     }, [
-      el("div", { class: "dot", text: c.name.slice(0, 1) }),
+      el("div", { class: "dot" }, c.portrait ? el("img", { src: c.portrait, alt: c.name }) : c.name.slice(0, 1)),
       el("div", { class: "label", text: c.name }),
     ]);
 
@@ -285,12 +394,15 @@ function renderCharacterDetail() {
     return;
   }
   const world = worldById(c.worldId);
+  const arc = arcById(c.storyArcId);
   document.title = `${c.name} · ${SITE.name}`;
   document.getElementById("breadcrumb").appendChild(
     el("span", {}, [
       el("a", { href: "index.html", text: "首页" }),
       " / ",
       world ? el("a", { href: `world.html?id=${world.id}`, text: world.title }) : "未知世界观",
+      " / ",
+      arc ? el("a", { href: "characters.html", text: arc.title }) : "未分类",
       " / ",
       c.name,
     ])
@@ -349,7 +461,7 @@ function renderCharacterDetail() {
   }
 
   // 关联故事
-  const related = STORIES.filter((s) => s.worldId === c.worldId);
+  const related = STORIES.filter((s) => s.storyArcId === c.storyArcId);
   if (related.length) {
     const list = el("div", { class: "story-list" });
     related.forEach((s) => {
@@ -373,13 +485,13 @@ function renderStoryDetail() {
     root.appendChild(el("div", { class: "empty-state" }, [el("div", { class: "empty-title", text: "没有找到这篇故事" })]));
     return;
   }
-  const world = worldById(s.worldId);
+  const arc = arcById(s.storyArcId);
   document.title = `${s.title} · ${SITE.name}`;
   document.getElementById("breadcrumb").appendChild(
     el("span", {}, [
       el("a", { href: "index.html", text: "首页" }),
       " / ",
-      world ? el("a", { href: `world.html?id=${world.id}`, text: world.title }) : el("a", { href: "drabbles.html", text: "短打" }),
+      arc ? el("a", { href: "stories.html", text: arc.title }) : el("a", { href: "drabbles.html", text: "短打" }),
       " / ",
       s.title,
     ])
@@ -425,3 +537,4 @@ function renderDrabbles(container) {
 }
 
 document.addEventListener("DOMContentLoaded", applySiteHeader);
+document.addEventListener("DOMContentLoaded", renderStarfield);

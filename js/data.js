@@ -1,7 +1,11 @@
 /* ============================================================
    data.js — 网站的全部内容都在这里
-   以后加新世界观 / 新角色 / 新故事，只需要在下面对应的数组里
-   照着格式加一条，不需要碰 html/css/其他 js 文件。
+   结构说明（2026-07 改版后）：
+   - WORLDS：只有一个"真正"的世界观 MAIN_WORLD_ID（黑泥的世界观），
+     其余是城市/地点性质的"小栏目"，各自独立，不挂角色/关系/故事。
+   - STORY_ARCS：主世界观下的故事线（原来的"宇宙学园""现代四城"），
+     角色、关系、故事都通过 storyArcId 挂在故事线下面，
+     故事线本身仍然统一属于 MAIN_WORLD_ID 这一个世界观。
    ============================================================ */
 
 const SITE = {
@@ -9,15 +13,20 @@ const SITE = {
   subtitle: "原创世界观档案库",  // 副标题
 };
 
+/* 唯一的"主世界观" id，其余 WORLDS 条目是地点性质的小栏目 */
+const MAIN_WORLD_ID = "cosmos-mythos";
+
 /* ----------------------------------------------------------
-   世界观列表
-   id：用于跳转链接，务必唯一，建议用英文/拼音，不要有空格
+   世界观 / 地点栏目列表
+   id：用于跳转链接，务必唯一
+   isPlace：true 表示这是一个地点性质的小栏目（城市/海洋等），
+            没有自己的角色档案/关系图/故事分类，只展示简介文字
    ---------------------------------------------------------- */
 const WORLDS = [
   {
     id: "cosmos-mythos",
     code: "W-001",
-    title: "黑泥宇宙 · 创世神话",
+    title: "黑泥的世界观",
     tagline: "熵、混乱与虚无化作的黑泥吞噬了几乎整个宇宙，太阳系是幸存者们用无数次轮回换来的最后一片乐土。",
     summary:
       "宇宙曾几乎被『黑泥』（污染）吞噬殆尽——它是熵增、混乱、终结与绝望在认知中的具象，能吞噬生命、物质乃至概念本身。" +
@@ -27,13 +36,74 @@ const WORLDS = [
       "神并非天生的种族，而是一种状态：灵魂 + 本源 = 神；神所代表的概念会不断渗透进自己创造的行星，" +
       "行星即是神将本源实体化后的巨大概念锚点，鲜明的灵魂因此能与黑泥对立、镇压少量污染。" +
       "这个世界真正讨论的主题不是『复活』，而是『未来』——已知无法创造未知，但无数已知的碰撞终将孕育未知，" +
-      "文明存在的意义，就是不断创造未来。",
-    updatedAt: "2026-07-14",
-    charCount: 0,
+      "文明存在的意义，就是不断创造未来。\n\n" +
+      "『宇宙学园·轮回大逃杀』与『现代四城·水潭病纪元』这两条故事线，都发生在这同一个世界观之下——" +
+      "前者是创世纪元的起点，后者是黑泥泄漏之后的现代。下方可以分别浏览角色档案、角色关系图和相关故事。",
+    updatedAt: "2026-07-15",
   },
   {
+    id: "city-spade",
+    code: "C-01",
+    title: "黑桃市",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    isPlace: true,
+    placeholder: true,
+  },
+  {
+    id: "city-diamond",
+    code: "C-02",
+    title: "方块市",
+    tagline: "被『水潭病』笼罩的城市，黑泥正从地心悄然渗出。",
+    summary:
+      "封存在地心的黑泥从这里率先泄漏。青少年之间爆发了一种叫『水潭病』的强力抑郁症——某一天，" +
+      "某高中的楼顶像下饺子一样坠落下数十名学生，在烈日的烘烤下，很多组织粘在地面的砖头上铲都铲不下来。" +
+      "『四人组』中的影蝶或就生活在这座城市，私下为本地黑帮（卢克的组织）做情报线人；" +
+      "她也曾不幸感染水潭病，内脏几乎被黑泥溶解。更多城市细节待补充。",
+    updatedAt: "2026-07-15",
+  },
+  {
+    id: "city-heart",
+    code: "C-03",
+    title: "红桃市",
+    tagline: "能力者实验的发源地，也是沙夏逃离的起点。",
+    summary:
+      "这座城市曾进行过『能力者实验』——沙夏正是这场实验的实验体之一，在过度严酷的竞争环境下经历了多轮洗脑，" +
+      "分化出两个人格。逃亡后，沙夏时常被来自红桃市的追兵追杀，后来才在方块市政府的特殊行动组安顿下来。" +
+      "更多城市细节待补充。",
+    updatedAt: "2026-07-15",
+  },
+  {
+    id: "city-club",
+    code: "C-04",
+    title: "梅花市",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    isPlace: true,
+    placeholder: true,
+  },
+  {
+    id: "ocean",
+    code: "C-05",
+    title: "海洋",
+    tagline: "设定征集中……",
+    summary: "这里还没有设定内容，欢迎补充。",
+    updatedAt: "2026-07-15",
+    isPlace: true,
+    placeholder: true,
+  },
+];
+
+/* ----------------------------------------------------------
+   故事线（原来的"世界观"，现在降级为主世界观下的分类）
+   id：用于角色/关系/故事的 storyArcId 关联
+   ---------------------------------------------------------- */
+const STORY_ARCS = [
+  {
     id: "reincarnation-academy",
-    code: "W-002",
+    code: "A-001",
     title: "宇宙学园 · 轮回大逃杀",
     tagline: "醒来后你身处漂浮在黑暗中的校园，九天后要给出你的答案——而答案的排名，决定谁能离太阳更近。",
     summary:
@@ -42,34 +112,34 @@ const WORLDS = [
       "成为神，并各自创造一颗行星。唯有主角『初瞑』能在每个周目保留全部轮回记忆，因为她的本源正是『未知』与『神秘』——" +
       "感受到本源，记忆便不会被清空。故事随着同学们逐一觉醒本源、互相试探、甚至彼此残杀而展开，" +
       "最终在初瞑死去、自我分割本源分给同伴后落幕。",
-    updatedAt: "2026-07-14",
-    charCount: 7,
+    updatedAt: "2026-07-15",
   },
   {
     id: "modern-cities",
-    code: "W-003",
+    code: "A-002",
     title: "现代四城 · 水潭病纪元",
     tagline: "被封存在地心的黑泥终于泄漏，城市里流行起一种叫『水潭病』的抑郁症——四个身份复杂的年轻人，正被卷入其中。",
     summary:
       "创世纪元落幕后，蓝色的人（地球的创造神）以『地球编辑器』般的双手持续塑造这颗行星，并以人类文明作为培养皿，" +
       "寄望聚合出与初瞑最相似的一个人类，令『未知』重新完整。她与火焰分别把初瞑临终前残留的污染封存进了地球与火星核心，" +
-      "然而漫长岁月后，封印开始从地心泄漏。在代号◆市的城市里，青少年间爆发了一种叫『水潭病』的强力抑郁症，" +
+      "然而漫长岁月后，封印开始从地心泄漏。在方块市，青少年间爆发了一种叫『水潭病』的强力抑郁症，" +
       "甚至有高中生成群坠楼。在这样的时代背景下，一支由人类、非人存在与实验体组成的『四人组』——" +
       "影蝶或、如月蜻蛉、雨宫黛、沙夏——各自带着秘密，生活在这座被污染笼罩的城市中。",
-    updatedAt: "2026-07-14",
-    charCount: 4,
+    updatedAt: "2026-07-15",
   },
 ];
 
 /* ----------------------------------------------------------
    角色列表
-   worldId：对应上面 WORLDS 里的 id，决定这个角色属于哪个世界观
-   portrait：先留空字符串即可，以后有图片了改成图片路径，比如 "images/xxx.png"
+   worldId：统一填主世界观 id（目前只有一个世界观）
+   storyArcId：对应上面 STORY_ARCS 里的 id，决定这个角色属于哪条故事线
+   portrait：图片路径，比如 "images/xxx.png"
    ---------------------------------------------------------- */
 const CHARACTERS = [
   {
     id: "chuming",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "初瞑",
     role: "主角视角 / 未知之神",
     portrait: "images/chuming.jpg",
@@ -88,7 +158,8 @@ const CHARACTERS = [
   },
   {
     id: "lanse-de-ren",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "蓝色的人",
     role: "知识之神 / 地球的创造者",
     portrait: "images/lanse-de-ren.jpg",
@@ -112,7 +183,8 @@ const CHARACTERS = [
   },
   {
     id: "moqiu",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "墨丘·利兰德",
     role: "悖论之神",
     portrait: "images/moqiu.jpg",
@@ -131,7 +203,8 @@ const CHARACTERS = [
   },
   {
     id: "huoyan",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "火焰",
     role: "爱与杀戮之神",
     portrait: "images/huoyan.jpg",
@@ -150,7 +223,8 @@ const CHARACTERS = [
   },
   {
     id: "jinxin",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "金鑫",
     role: "律法之神",
     portrait: "images/jinxin.jpg",
@@ -167,7 +241,8 @@ const CHARACTERS = [
   },
   {
     id: "yuantian",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "远天",
     role: "权力之神 / 蓄意加害者",
     portrait: "images/yuantian.jpg",
@@ -184,7 +259,8 @@ const CHARACTERS = [
   },
   {
     id: "shenhai",
-    worldId: "reincarnation-academy",
+    worldId: "cosmos-mythos",
+    storyArcId: "reincarnation-academy",
     name: "深海",
     role: "远天的沉默跟班",
     portrait: "images/shenhai.jpg",
@@ -198,19 +274,20 @@ const CHARACTERS = [
   },
   {
     id: "yingdiehuo",
-    worldId: "modern-cities",
+    worldId: "cosmos-mythos",
+    storyArcId: "modern-cities",
     name: "影蝶或",
     role: "四人组 · 讲段子担当",
     portrait: "images/yingdiehuo.jpg",
     origin: "",
     quickFacts: [
-      ["身份", "◆市黑帮情报线人（私下打工）"],
+      ["身份", "方块市黑帮情报线人（私下打工）"],
       ["同居", "如月蜻蛉"],
       ["体质", "四人组里身体素质最差"],
     ],
     bio:
       "最初只是想设定一个『克服疾病、以乐观释然的态度看待人生』的OC，后来渐渐有了很多朋友和故事。" +
-      "吸收了◆市绝大多数的污染并与其共存，内脏几乎已被黑泥溶解，因此一年四季都穿长袖遮掩，偶尔还是会犯病。" +
+      "吸收了方块市绝大多数的污染并与其共存，内脏几乎已被黑泥溶解，因此一年四季都穿长袖遮掩，偶尔还是会犯病。" +
       "生活习惯不算好，会报复性熬夜、暴饮暴食。私下在给黑帮（卢克的组织）做情报线人打工，和如月蜻蛉同居。" +
       "在『四人组』里负责讲段子、活跃气氛，是四人中身体素质最差的一个（活该的）。" +
       "意外地有学习天赋，但本人对学校的态度非常消极。",
@@ -218,7 +295,8 @@ const CHARACTERS = [
   },
   {
     id: "ruyue-qingling",
-    worldId: "modern-cities",
+    worldId: "cosmos-mythos",
+    storyArcId: "modern-cities",
     name: "如月蜻蛉",
     role: "四人组 · 收拾烂摊子担当",
     portrait: "images/ruyue-qingling.jpg",
@@ -239,7 +317,8 @@ const CHARACTERS = [
   },
   {
     id: "yugong-dai",
-    worldId: "modern-cities",
+    worldId: "cosmos-mythos",
+    storyArcId: "modern-cities",
     name: "雨宫黛",
     role: "四人组 · 氛围担当",
     portrait: "images/yugong-dai.jpg",
@@ -268,21 +347,22 @@ const CHARACTERS = [
   },
   {
     id: "shaxia",
-    worldId: "modern-cities",
+    worldId: "cosmos-mythos",
+    storyArcId: "modern-cities",
     name: "沙夏",
     role: "四人组 · 战力担当",
     portrait: "images/shaxia.jpg",
     origin: "",
     quickFacts: [
-      ["身份", "❤️城市能力者实验的实验体"],
+      ["身份", "红桃市能力者实验的实验体"],
       ["性别", "不明"],
-      ["现职", "◆市政府特殊行动组（为酥德工作）"],
+      ["现职", "方块市政府特殊行动组（为酥德工作）"],
     ],
     bio:
-      "❤️城市『能力者实验』的实验体，在过度严酷的竞争环境下经历了多轮洗脑，从而分化出两个人格（更接近于两种『表演形态』）。" +
+      "红桃市『能力者实验』的实验体，在过度严酷的竞争环境下经历了多轮洗脑，从而分化出两个人格（更接近于两种『表演形态』）。" +
       "战斗时会表现出从容自在、狂放不羁的性格用以威慑对手，但实际上本人很闷；两个人格都受扭曲的价值观影响，" +
       "很难真正融入正常人的生活。是『四人组』里最能打的一个，也是唯一不上学的成员。" +
-      "逃亡后时常被来自❤️城市的追兵追杀，后来加入了◆市政府的特殊行动组；曾与酥德遭遇战斗，" +
+      "逃亡后时常被来自红桃市的追兵追杀，后来加入了方块市政府的特殊行动组；曾与酥德遭遇战斗，" +
       "被其收拾了一顿后转为替酥德工作（『喜提编制』）。她深夜网聊的对象是雨宫黛，但对方并不知道她的真实身份。",
     traits: ["实验体", "双重人格（两种表演形态）", "四人组最能打", "性别不明"],
   },
@@ -290,37 +370,38 @@ const CHARACTERS = [
 
 /* ----------------------------------------------------------
    角色关系
+   storyArcId：对应 STORY_ARCS 里的 id，决定这条关系属于哪条故事线的关系图
    from / to：角色 id
    label：关系描述，比如 "同学"、"宿敌"、"守护"
    ---------------------------------------------------------- */
 const RELATIONS = [
-  { worldId: "reincarnation-academy", from: "chuming", to: "lanse-de-ren", label: "初瞑向她求助以保留记忆，其临终遗言让蓝色的人性情大变" },
-  { worldId: "reincarnation-academy", from: "lanse-de-ren", to: "yuantian", label: "远天借知识泄露之机杀害了她" },
-  { worldId: "reincarnation-academy", from: "chuming", to: "moqiu", label: "曾在个人线中屠杀全校，后来向初瞑保证不会再犯" },
-  { worldId: "reincarnation-academy", from: "chuming", to: "yuantian", label: "远天因嫉妒与忌惮图谋杀害初瞑" },
-  { worldId: "reincarnation-academy", from: "chuming", to: "huoyan", label: "死后本源分给了她" },
-  { worldId: "reincarnation-academy", from: "jinxin", to: "huoyan", label: "关系很好" },
-  { worldId: "reincarnation-academy", from: "jinxin", to: "yuantian", label: "能力上克制远天，是应对他的对策卡" },
-  { worldId: "reincarnation-academy", from: "yuantian", to: "shenhai", label: "深海是远天沉默的跟班" },
+  { storyArcId: "reincarnation-academy", from: "chuming", to: "lanse-de-ren", label: "初瞑向她求助以保留记忆，其临终遗言让蓝色的人性情大变" },
+  { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "yuantian", label: "远天借知识泄露之机杀害了她" },
+  { storyArcId: "reincarnation-academy", from: "chuming", to: "moqiu", label: "曾在个人线中屠杀全校，后来向初瞑保证不会再犯" },
+  { storyArcId: "reincarnation-academy", from: "chuming", to: "yuantian", label: "远天因嫉妒与忌惮图谋杀害初瞑" },
+  { storyArcId: "reincarnation-academy", from: "chuming", to: "huoyan", label: "死后本源分给了她" },
+  { storyArcId: "reincarnation-academy", from: "jinxin", to: "huoyan", label: "关系很好" },
+  { storyArcId: "reincarnation-academy", from: "jinxin", to: "yuantian", label: "能力上克制远天，是应对他的对策卡" },
+  { storyArcId: "reincarnation-academy", from: "yuantian", to: "shenhai", label: "深海是远天沉默的跟班" },
 
-  { worldId: "modern-cities", from: "yingdiehuo", to: "ruyue-qingling", label: "同居，她对影蝶或的传闻很感兴趣" },
-  { worldId: "modern-cities", from: "yugong-dai", to: "shaxia", label: "深夜网友（雨宫黛并不知道对方真实身份就是沙夏）" },
-  { worldId: "modern-cities", from: "yingdiehuo", to: "yugong-dai", label: "四人组队友" },
-  { worldId: "modern-cities", from: "yingdiehuo", to: "shaxia", label: "四人组队友" },
-  { worldId: "modern-cities", from: "ruyue-qingling", to: "yugong-dai", label: "四人组队友" },
-  { worldId: "modern-cities", from: "ruyue-qingling", to: "shaxia", label: "四人组队友" },
+  { storyArcId: "modern-cities", from: "yingdiehuo", to: "ruyue-qingling", label: "同居，她对影蝶或的传闻很感兴趣" },
+  { storyArcId: "modern-cities", from: "yugong-dai", to: "shaxia", label: "深夜网友（雨宫黛并不知道对方真实身份就是沙夏）" },
+  { storyArcId: "modern-cities", from: "yingdiehuo", to: "yugong-dai", label: "四人组队友" },
+  { storyArcId: "modern-cities", from: "yingdiehuo", to: "shaxia", label: "四人组队友" },
+  { storyArcId: "modern-cities", from: "ruyue-qingling", to: "yugong-dai", label: "四人组队友" },
+  { storyArcId: "modern-cities", from: "ruyue-qingling", to: "shaxia", label: "四人组队友" },
 ];
 
 /* ----------------------------------------------------------
    故事 / 短打
    type: "长篇" | "短篇" | "短打"   —— 会显示成小标签
-   worldId：留空字符串 "" 表示不属于特定世界观（比如纯短打练笔）
-   content：正文，用 \n 换行；先放示例文字
+   storyArcId：对应 STORY_ARCS 里的 id；留空字符串 "" 表示不属于任何故事线（比如纯短打练笔）
+   content：正文，用 \n 换行
    ---------------------------------------------------------- */
 const STORIES = [
   {
     id: "chuming-di-ji-ci-xinglai",
-    worldId: "reincarnation-academy",
+    storyArcId: "reincarnation-academy",
     type: "短打",
     title: "第几次醒来了",
     date: "2026-07-14",
@@ -348,7 +429,7 @@ const STORIES = [
   },
   {
     id: "huozhe-de-dingze",
-    worldId: "",
+    storyArcId: "",
     type: "短篇",
     title: "在某一刻我学会了活在这个世界上",
     date: "2026-07-14",

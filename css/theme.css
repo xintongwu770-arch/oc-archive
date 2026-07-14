@@ -10,7 +10,7 @@
   --color-bg-raised: #1c1a3d;   /* 悬浮/选中状态底色 */
   --color-border:    #2a2650;   /* 分割线、描边 */
 
-  --color-text:       #e8e6f9;  /* 正文，微紫的星光白 */
+  --color-text:       #cdd0e8;  /* 正文，浅银色 */
   --color-text-dim:   #9b9bc9;  /* 次要文字 */
   --color-text-faint: #656590;  /* 更次要的文字（占位符提示等） */
 
@@ -20,6 +20,13 @@
 
   --color-success: #5f9c8f;
   --color-warning: #c9a04f;
+
+  /* —— 宇宙风特效专用 —— */
+  --color-glow:       rgba(139, 155, 245, 0.55); /* 模块发光描边颜色 */
+  --color-star:        #f2f3ff;                   /* 星点颜色 */
+  --color-planet-1:    #b7aaff;                    /* 角落矢量星球配色 1 */
+  --color-planet-2:    #7c8ff2;                    /* 角落矢量星球配色 2 */
+  --color-planet-3:    #8fc0f5;                    /* 角落矢量星球配色 3 */
 
   /* —— 字体 —— */
   /* 中文字体优先用系统黑体/宋体，英文数字用等宽或衬线做"档案感" */

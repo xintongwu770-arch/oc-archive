@@ -8,12 +8,46 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% -10%, rgba(90, 70, 190, 0.35), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 90% 5%, rgba(60, 110, 200, 0.28), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 105%, rgba(70, 40, 140, 0.30), transparent 60%),
+    var(--color-bg);
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 星空背景：随机分布、缓慢闪烁的星点 ---------- */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.starfield .star {
+  position: absolute;
+  background: var(--color-star);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation-name: twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.12; transform: scale(0.85); }
+  50% { opacity: 0.95; transform: scale(1.2); }
+}
+
+/* 星空在最底层，页面主体内容需要显式盖在它上面 */
+.topnav, .layout, .hero, main, .site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -40,7 +74,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-3) var(--space-5);
-  background: rgba(20, 21, 26, 0.9);
+  background: rgba(11, 10, 26, 0.82);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -154,6 +188,58 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   }
 }
 
+/* ---------- 宇宙风模块：发光描边 + 星尘纹理 + 角落矢量星球 ---------- */
+.cosmic-block {
+  position: relative;
+  border: 1px solid var(--color-accent-dim);
+  box-shadow: 0 0 0 1px rgba(139, 155, 245, 0.12), 0 0 20px var(--color-glow), 0 8px 20px rgba(10, 8, 30, 0.4);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(255, 255, 255, 0.55) 0, transparent 60%),
+    radial-gradient(1px 1px at 78% 55%, rgba(255, 255, 255, 0.4) 0, transparent 60%),
+    radial-gradient(1.4px 1.4px at 42% 78%, rgba(255, 255, 255, 0.35) 0, transparent 60%),
+    radial-gradient(1px 1px at 62% 12%, rgba(255, 255, 255, 0.3) 0, transparent 60%),
+    radial-gradient(1.4px 1.4px at 90% 88%, rgba(255, 255, 255, 0.3) 0, transparent 60%),
+    radial-gradient(1px 1px at 25% 90%, rgba(255, 255, 255, 0.25) 0, transparent 60%);
+  background-repeat: no-repeat;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.cosmic-block:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px rgba(139, 155, 245, 0.22), 0 0 26px var(--color-glow), 0 8px 20px rgba(10, 8, 30, 0.45);
+}
+.cosmic-block::before,
+.cosmic-block::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+.cosmic-block::before {
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 35% 30%, var(--color-planet-1) 0%, var(--color-planet-2) 45%, transparent 78%);
+  opacity: 0.55;
+  box-shadow: -34px 20px 0 -13px var(--color-planet-3);
+}
+.cosmic-block::after {
+  bottom: 10px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle at 35% 30%, var(--color-planet-3) 0%, var(--color-planet-2) 55%, transparent 80%);
+  opacity: 0.4;
+}
+.world-card-main.cosmic-block {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px rgba(139, 155, 245, 0.28), 0 0 32px var(--color-glow), 0 8px 22px rgba(10, 8, 30, 0.5);
+}
+.world-card-placeholder.cosmic-block {
+  opacity: 0.7;
+}
+
 /* ---------- 通用面板/卡片 ---------- */
 .panel {
   background: var(--color-bg-panel);
@@ -263,6 +349,79 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   color: var(--color-text-faint);
   border-top: 1px solid var(--color-border);
   padding-top: var(--space-2);
+}
+
+/* ---------- 世界观说明页：大banner + 分类按钮 ---------- */
+.world-banner {
+  padding: var(--space-7) var(--space-5);
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-panel);
+}
+.world-banner-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-accent-text);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-3);
+}
+.world-banner h1 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4.5vw, 42px);
+  margin: 0 0 var(--space-3);
+  line-height: 1.35;
+}
+.world-banner p {
+  color: var(--color-text-dim);
+  max-width: 760px;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.category-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+.category-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-panel);
+  transition: transform 0.15s ease;
+}
+.category-btn:hover { transform: translateY(-2px); color: var(--color-text); }
+.category-btn-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+.category-btn-desc {
+  font-size: 12.5px;
+  color: var(--color-text-faint);
+}
+
+/* ---------- 故事线分组（角色档案页 / 关系图页共用） ---------- */
+.arc-section { margin-bottom: var(--space-7); }
+.arc-section-header { margin-bottom: var(--space-4); }
+.arc-section-header h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+.arc-section-header p {
+  color: var(--color-text-dim);
+  font-size: 13px;
+  margin: 0;
+  max-width: 720px;
+}
+
+.arc-story-intros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
 }
 
 /* ---------- 标签页（世界观内部：概述/角色/关系图/故事） ---------- */
@@ -421,6 +580,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   justify-content: center;
   font-family: var(--font-display);
   font-size: 14px;
+  overflow: hidden;
+}
+.relation-node .dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .relation-node:hover .dot { border-color: var(--color-accent); }
 .relation-node .label {
@@ -459,6 +624,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   flex-shrink: 0;
 }
 .story-item .story-title { font-weight: 600; flex: 1; }
+.story-item .story-arc { font-size: 11px; color: var(--color-text-faint); white-space: nowrap; }
 .story-item .story-date { font-size: 12px; color: var(--color-text-faint); }
 
 .prose {
