@@ -130,7 +130,11 @@ function renderWorldDetail() {
     chars.forEach((c) => {
       grid.appendChild(
         el("a", { class: "char-card", href: `character.html?id=${c.id}` }, [
-          el("div", { class: "char-portrait", text: c.portrait ? "" : "肖像占位" }),
+          el(
+            "div",
+            { class: "char-portrait" },
+            c.portrait ? el("img", { src: c.portrait, alt: c.name }) : "肖像占位"
+          ),
           el("div", { class: "char-info" }, [
             el("div", { class: "char-name", text: c.name }),
             el("div", { class: "char-role", text: c.role || "" }),
@@ -293,7 +297,11 @@ function renderCharacterDetail() {
   );
 
   const header = el("div", { class: "char-detail-header" }, [
-    el("div", { class: "char-detail-portrait", text: c.portrait ? "" : "肖像占位" }),
+    el(
+      "div",
+      { class: "char-detail-portrait" },
+      c.portrait ? el("img", { src: c.portrait, alt: c.name }) : "肖像占位"
+    ),
     el("div", { class: "char-detail-meta" }, [
       el("h1", { text: c.name }),
       el("div", { class: "subtitle", text: c.role || "" }),

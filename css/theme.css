@@ -4,21 +4,21 @@
    ============================================================ */
 
 :root {
-  /* —— 颜色 —— */
-  --color-bg:        #14151a;   /* 页面底色 */
-  --color-bg-panel:  #1c1e26;   /* 卡片/面板底色 */
-  --color-bg-raised: #22242e;   /* 悬浮/选中状态底色 */
-  --color-border:    #33353f;   /* 分割线、描边 */
+  /* —— 颜色：星海低语 · 深空靛蓝 + 星光紫蓝 —— */
+  --color-bg:        #0b0a1a;   /* 页面底色，接近深空/黑洞的靛蓝黑 */
+  --color-bg-panel:  #15132e;   /* 卡片/面板底色 */
+  --color-bg-raised: #1c1a3d;   /* 悬浮/选中状态底色 */
+  --color-border:    #2a2650;   /* 分割线、描边 */
 
-  --color-text:       #e7e7ec;  /* 正文 */
-  --color-text-dim:   #9496a3;  /* 次要文字 */
-  --color-text-faint: #64666f;  /* 更次要的文字（占位符提示等） */
+  --color-text:       #e8e6f9;  /* 正文，微紫的星光白 */
+  --color-text-dim:   #9b9bc9;  /* 次要文字 */
+  --color-text-faint: #656590;  /* 更次要的文字（占位符提示等） */
 
-  --color-accent:      #c94f4f; /* 主强调色（标签、链接高亮、边框） */
-  --color-accent-dim:  #7a3535; /* 强调色的暗版（用于底纹、次要强调） */
-  --color-accent-text: #ff8a7a; /* 强调色用于文字时更亮一点，保证可读性 */
+  --color-accent:      #7c8ff2; /* 主强调色，蓝紫之间（标签、链接高亮、边框） */
+  --color-accent-dim:  #35306a; /* 强调色的暗版（用于底纹、次要强调） */
+  --color-accent-text: #8fc0f5; /* 强调色用于文字时更偏亮蓝，保证可读性 */
 
-  --color-success: #4f9c6a;
+  --color-success: #5f9c8f;
   --color-warning: #c9a04f;
 
   /* —— 字体 —— */
@@ -30,7 +30,7 @@
   /* —— 圆角 / 阴影 —— */
   --radius-sm: 2px;
   --radius-md: 4px;
-  --shadow-panel: 0 1px 0 rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.25);
+  --shadow-panel: 0 1px 0 rgba(0,0,0,0.4), 0 8px 24px rgba(30,20,70,0.35);
 
   /* —— 间距刻度 —— */
   --space-1: 4px;
@@ -47,18 +47,18 @@
   --content-max-width: 1200px;
 }
 
-/* 亮色主题示例（如果想要浅色版本，把 <html> 加上 data-theme="light" 即可） */
+/* 亮色主题（如果想要浅色版本，把 <html> 加上 data-theme="light" 即可） */
 [data-theme="light"] {
-  --color-bg:        #f6f5f2;
+  --color-bg:        #f4f3fb;
   --color-bg-panel:  #ffffff;
-  --color-bg-raised: #f0eee9;
-  --color-border:    #e0ddd6;
+  --color-bg-raised: #ece9fa;
+  --color-border:    #ddd8f5;
 
-  --color-text:       #201f1c;
-  --color-text-dim:   #6b6862;
-  --color-text-faint: #a5a29a;
+  --color-text:       #201f36;
+  --color-text-dim:   #5f5c80;
+  --color-text-faint: #9c98bd;
 
-  --color-accent:      #a83f3f;
-  --color-accent-dim:  #e7cfcf;
-  --color-accent-text: #a83f3f;
+  --color-accent:      #6c5ce0;
+  --color-accent-dim:  #e2ddfa;
+  --color-accent-text: #4a5fd4;
 }
