@@ -538,6 +538,19 @@ function renderCharacterDetail() {
   ]);
   root.appendChild(header);
 
+  if (c.gallery && c.gallery.length) {
+    root.appendChild(
+      el("div", { class: "section-block" }, [
+        el("h2", { text: "更多立绘" }),
+        el(
+          "div",
+          { class: "char-gallery" },
+          c.gallery.map((src) => el("a", { href: src, target: "_blank", class: "char-gallery-item" }, el("img", { src, alt: c.name })))
+        ),
+      ])
+    );
+  }
+
   if (c.bio) {
     root.appendChild(
       el("div", { class: "section-block" }, [
