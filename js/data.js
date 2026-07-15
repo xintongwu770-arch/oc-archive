@@ -246,6 +246,18 @@ const STORY_ARCS = [
     updatedAt: "2026-07-15",
     placeholder: true,
   },
+  {
+    id: "parallel-world-story",
+    code: "A-008",
+    title: "平行世界的故事",
+    tagline: "隔壁平行世界的一个紫色的神——如果她在，主世界观里『地球的神失踪』的事就不会发生。",
+    summary:
+      "与『黑泥的世界观』相邻的一个平行世界，设定还在征集中。目前已知这个世界里有一位紫色的神，" +
+      "据说如果这位神明存在于主世界观里，蓝色的人（地球的神）后来失忆、跌落人类社会的事情就不会发生。" +
+      "更多设定欢迎补充。",
+    updatedAt: "2026-07-15",
+    placeholder: true,
+  },
 ];
 
 /* ----------------------------------------------------------
@@ -282,6 +294,7 @@ const CHARACTERS = [
     name: "蓝色的人",
     role: "知识之神 / 地球的创造者",
     portrait: "images/lanse-de-ren.jpg",
+    gallery: ["images/lanse-de-ren-2.jpg"],
     origin: "本源为知识、智慧",
     quickFacts: [
       ["身份", "轮回学园同学 → 地球创造神"],
@@ -619,6 +632,22 @@ const CHARACTERS = [
       "『从复活开始恐怖无限流』里被提起的一位老玩家，姓苏，曾在一次次『副本』中取得较高的通关排行，" +
       "但已经很久没有她的消息了——很可能已经死了。更多设定欢迎补充。",
     traits: ["副本老玩家", "下落不明"],
+  },
+  {
+    id: "meng-le-zhaoxi",
+    worldId: "cosmos-mythos",
+    storyArcId: "parallel-world-story",
+    name: "梦楽咲希",
+    role: "平行世界的紫色神",
+    portrait: "images/meng-le-zhaoxi.jpg",
+    origin: "",
+    quickFacts: [
+      ["身份", "隔壁平行世界的一位神明"],
+    ],
+    bio:
+      "与『黑泥的世界观』相邻的平行世界里的一位紫色的神。据说如果她存在于主世界观中，蓝色的人（地球的神）" +
+      "后来为救回被污染吞噬的本源分支而身受重伤、失忆跌落人类社会的事情就不会发生。更多设定欢迎补充。",
+    traits: ["平行世界的神明"],
   },
 ];
 
