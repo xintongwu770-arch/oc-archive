@@ -874,7 +874,7 @@ const CHARACTERS = [
     storyArcId: "red-heart-corporate",
     name: "沈照棠",
     role: "你是真实存在的人，还是一个人格？",
-    portrait: "images/approved-shen-zhaotang-v2.png",
+    portrait: "images/approved-shen-zhaotang-v3.png",
     origin: "沈怀川的亲妹妹",
     quickFacts: [["性别", "女性，已成年"], ["状态", "长期昏迷，结局获救"], ["天赋", "杀手天赋远高于哥哥"]],
     bio:
