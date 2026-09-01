@@ -386,7 +386,7 @@ const CHARACTERS = [
     storyArcId: "modern-cities",
     name: "如月蜻蛉",
     role: "没有过去，却比谁都擅长学会人类生活的少女",
-    portrait: "images/approved-ruyue-qingling.png",
+    portrait: "images/approved-ruyue-qingling-v2.png",
     gallery: ["images/ruyue-qingling.jpg"],
     origin: "蓝色创世神本人；原本源与知识、娱乐相关",
     quickFacts: [
