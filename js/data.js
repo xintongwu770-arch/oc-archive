@@ -693,7 +693,7 @@ const CHARACTERS = [
     storyArcId: "resurrection-horror",
     name: "全知之书·潘朵拉贡",
     role: "为生命提供全部知识蓝本的原始造物",
-    portrait: "images/approved-dora.png",
+    portrait: "images/approved-pandoragon-v2.png",
     hiddenFromRoster: true,
     origin: "蓝色创世神制造的原始造物；造化之胎·伽拉忒亚的妹妹",
     quickFacts: [["原始形态", "没有性别；『妹妹』是当前关系称呼"], ["能力", "拥有并整合地球上绝大多数知识"], ["创生分工", "回答生命应当如何构成，为伽拉忒亚提供资料、结构与素材"], ["现代称呼", "朵拉（DORA），取自原始名称的一部分"]],
