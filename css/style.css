@@ -500,6 +500,10 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   font-size: 12px;
   color: var(--color-text-faint);
 }
+.intro-accent-red { color: #ff4d61; font-weight: 700; }
+.intro-accent-violet { color: #9474ff; font-weight: 700; }
+.home-page .hero-visual img { object-position: 66% center; filter: saturate(.9) contrast(1.08); }
+.home-page .hero-visual:hover img { filter: saturate(1) contrast(1.03); }
 
 /* ---------- 角色详情页 ---------- */
 .char-detail-header {

@@ -10,7 +10,7 @@
 
 const SITE = {
   name: "OC ARCHIVE",          // 网站名（会显示在左上角）
-  subtitle: "原创世界观档案库",  // 副标题
+  subtitle: "欢迎观看鱿鱼的oc",  // 副标题
 };
 
 /* 唯一的"主世界观" id，其余 WORLDS 条目是地点性质的小栏目 */
@@ -27,7 +27,7 @@ const WORLDS = [
     id: "cosmos-mythos",
     code: "W-001",
     title: "黑泥的世界观",
-    tagline: "熵、混乱与虚无化作的黑泥吞噬了几乎整个宇宙，太阳系是幸存者们用无数次轮回换来的最后一片乐土。",
+    tagline: "熵、混乱与虚无化作的黑泥吞噬了几乎整个宇宙，太阳系是最后的一片净土了（前提是你不会平行宇宙穿梭）",
     summary:
       "最初，宇宙几乎已经被黑泥填满。它吞噬物质，也吞噬情感、概念和生命之间原本清楚的边界；接触少量污染的人会失去情绪、渴望死亡，或看着自己的身体与别人的意识长到一起。\n\n" +
       "这个世界只是某位庞大盲神的一段梦。梦仍有颜色，祂便继续沉睡；梦境一旦只剩下黑泥，所有世界也会随醒来一同消失。于是神的虚影带着毁灭文明留下的残片，抵达宇宙最后一处未被淹没的角落。幸存者们在那里经历轮回，获得本源，成为后来创造太阳系的神。\n\n" +
@@ -43,7 +43,8 @@ const WORLDS = [
     id: "city-spade",
     code: "C-01",
     title: "黑桃市",
-    tagline: "日常生活是一场被维护的长梦；所谓恐怖副本，才是肉身真正醒来的城市。",
+    tagline: "黑桃市受灾严重，科技发达，可以管理全城信息，可以做任何事情的人工智能“朵拉”使人们的生活非常方便愉快。恐怖无限流？那是什么，借一步说话，原来你也是玩家？",
+    taglineHtml: "黑桃市受灾严重，科技发达，可以管理全城信息，可以做任何事情的人工智能“朵拉”使人们的生活非常方便愉快。<br><br>恐怖无限流？那是什么，借一步说话，<span class=\"intro-accent-red\">原来你也是玩家？</span>",
     summary:
       "黑桃市的居民每天按时醒来、工作、回家，并在睡梦中被选进恐怖副本。至少他们一直这样认为。\n\n" +
       "真正沉睡的是日常。肉体被保存在鬼城市中心，只有副本开始时才会醒来，再由朵拉投入伽拉忒亚创造的血肉城市。学校、医院和监狱仍保留原来的用途，死者、失败玩家与无法沟通的怪物则住在更靠近城郊的地方。\n\n" +
@@ -56,7 +57,7 @@ const WORLDS = [
     id: "city-diamond",
     code: "C-02",
     title: "方片市",
-    tagline: "异能力、圣教与地下组织共同治理的城市；黑泥正从地心悄然渗出。",
+    tagline: "纯白圣教与异能力组织共同治理的一座城市，一边信奉一切皆归于无，另一边的宗旨是弱肉强食，强者至上。人们不知道异能从何诞生，但却恐惧与其他人不同。",
     summary:
       "封在地心的黑泥最先从方片市泄漏。接触少量污染的人会逐渐失去情感，产生寻死冲动；城市把它称作水潭病，仿佛这样便能让学生集体坠楼听起来更接近一种可以治疗的疾病。\n\n" +
       "市长仍然出现在公开文件上。真正需要决定一件大事时，人们会等待卢克·马菲与稣德的意见：一个掌握地下组织，一个代表纯白圣教；异能力者与普通人的秩序从两边同时压住城市。\n\n" +
@@ -69,7 +70,7 @@ const WORLDS = [
     id: "city-heart",
     code: "C-03",
     title: "红桃市",
-    tagline: "市民信仰乌托邦；不公开的国家实验，则负责决定谁能被塑造成它需要的人。",
+    tagline: "传说中的乌托邦，美丽又安全的城市，而它的代价呢？",
     summary:
       "红桃市没有官方宗教。市民相信的是乌托邦本身，相信这座城市会把每个人安排在最合适的位置。\n\n" +
       "地下的『学校』也遵循同一句话。最高统治者默许它以国家实验的名义排名、惩罚并开发学生，直到能力抵达上限，或人先成为不再值得培养的部分。沙夏的面具便是在这里形成。\n\n" +
@@ -82,7 +83,7 @@ const WORLDS = [
     id: "city-club",
     code: "C-04",
     title: "梅花市",
-    tagline: "魔法传统、猎魔教育与怪物亚空间交叠的城市。",
+    tagline: "传说这个城市中有无数扇通往异次元的大门，而其中有吃人的恐怖怪物！从而诞生的猎魔人组织则负责从怪物手中守护人类。",
     summary:
       "梅花市研究魔法，也负责处理魔法留下的东西。猎魔人穿过城市与亚空间之间的缝隙，寻找会捕食人类的怪物；能杀死的杀死，不能杀死的驱逐或封印。\n\n" +
       "杞令芊继承两条古老传承，以影法术战斗。她的冰系前辈在黑龙事件中被枝桠贯穿，死在树上。此后她仍继续执行任务，偶尔会在自己的动作里看见一段还没学完的技法。",
@@ -94,7 +95,7 @@ const WORLDS = [
     id: "ocean",
     code: "C-05",
     title: "海洋",
-    tagline: "把仅存的人类分隔成四座城市的浩瀚海域，每一座城市都跟国家一样大。",
+    tagline: "从某天开始，天空和海洋变得危险，除非中央允许，否则没有人会再敢去乘坐飞机或者船只。谁也不知道海洋中发生了什么变化，但踏入其中的人很少再回来。",
     summary:
       "海把仅存的人类分在四座城市里。黑桃、方片、红桃与梅花彼此看得见名字，却很难真正抵达；每一座所谓城市，都大得足以被当作一个国家。\n\n" +
       "航线穿过其中，也把恶魔公司的契约与讨债小队带往不同岸边。海洋暂时没有更多档案。它只负责保持距离。",
@@ -113,7 +114,7 @@ const STORY_ARCS = [
     id: "reincarnation-academy",
     code: "A-001",
     title: "如何创造太阳系",
-    tagline: "醒来后你身处漂浮在黑暗中的校园，九天后要给出你的答案——而答案的排名，决定谁能离太阳更近。",
+    tagline: "醒来后身处漂浮在黑暗中的校园，九天后给出你的答案——创造一个世界究竟需要什么？",
     summary:
       "醒来时，所有人都坐在一间漂浮于黑暗中的教室。老师指向远处唯一的光：『参考那盏灯吧。那是完美的恒星——太阳。』\n\n" +
       "他们将在这里生活九天，各自交出一个答案。老师负责排列高低；毕业以后，答案越好的人便能离太阳越近。第九天结束，记忆清空，课堂重新开始。\n\n" +
@@ -125,7 +126,7 @@ const STORY_ARCS = [
     id: "modern-cities",
     code: "A-002",
     title: "混杂很多的日常生活",
-    tagline: "微量黑泥足以令有意识生命感染绝症；四个各有秘密的朋友，正生活在爆发后的方片市。",
+    tagline: "四个朋友，互相都有着不可告人的秘密，在日常生活中遭遇一些非日常。",
     summary:
       "地心的封印开始泄漏以后，方片市先学会了给灾难起一个听起来不那么可怕的名字：水潭病。微量黑泥使人失去情感、产生寻死冲动，严重时改变肉体；学校仍然考试，咖啡店仍然营业，公开政府之下的两股势力仍然争夺城市。\n\n" +
       "影蝶或、如月蜻蛉、雨宫黛与沙夏就在这里生活。她们之中有人被污染吞噬过，有人忘记自己曾是神，有人努力扮演完美的普通学生，也有人刚从另一座城市的实验学校逃出来。\n\n" +
@@ -136,7 +137,7 @@ const STORY_ARCS = [
     id: "tangled-consequences",
     code: "A-003",
     title: "纠缠的恶果",
-    tagline: "一个从孤儿窝里杀出来的黑帮老大，和被他一手养大又一手弄死的白发人造人——爱恨纠缠，谁都没能全身而退。",
+    tagline: "一个从孤儿窝里杀出来的黑帮首领，和被他一手养大又弄死的白发人造人——爱恨纠缠，谁都没能全身而退。",
     summary:
       "卢克从钻石帮收养的孤儿里活下来，与云平一同发动起义，最后又从背后开枪杀死云平。后来他收留白发人造人稣德，把自己曾经受过的控制包装成培养，直到稣德在暴动中违抗命令，他再次下令开枪。\n\n" +
       "稣德死后与纯白神交易，回到人间。他做的第一件事，是把住院中的卢克带走，关进一间没有颜色的白房间。\n\n" +
@@ -148,7 +149,8 @@ const STORY_ARCS = [
     id: "demon-hunter",
     code: "A-004",
     title: "一位猎魔人的故事",
-    tagline: "影法术穿过城市暗面；她继承的，不只有两条古老血脉。",
+    tagline: "为了城市，为了人类，为了，复仇。",
+    taglineHtml: "为了城市，为了人类，为了，<span class=\"intro-accent-violet\">复仇。</span>",
     summary:
       "杞令芊在梅花市处理食人的怪物。她能让影子附着、穿梭、伸出手，也继承了预言之子与守门巫女留下的门；有些目标应当杀死，有些只能驱逐或封印。\n\n" +
       "冰系前辈死在黑龙事件里，被枝桠贯穿，留在树上。杞令芊没能学完他的技法，也没有说完原本以为以后总有机会说的话。\n\n" +
@@ -159,7 +161,7 @@ const STORY_ARCS = [
     id: "resurrection-horror",
     code: "A-005",
     title: "从复活开始恐怖无限流",
-    tagline: "她已经死过一次；复活后的第一个任务，是从被颠倒的现实里重新认识自己。",
+    tagline: "苏浮生好像死过一次，但她又复活了，代价是必须玩恐怖副本游戏。",
     summary:
       "苏浮生曾是排名靠前的老玩家。她通过朵拉一次又一次筛选，抵达副本最深处，最后被交给伽拉忒亚作为重返当代的身体。\n\n" +
       "吞噬失败了。三成苏浮生与七成伽拉忒亚留在同一具身体里，醒来时谁也不记得自己。朵拉把她重新包装成第一次收到邀请的预备玩家，说：『很高兴你会来。』\n\n" +
@@ -170,7 +172,7 @@ const STORY_ARCS = [
     id: "demon-company",
     code: "A-006",
     title: "恶魔公司",
-    tagline: "替恶魔放贷、签约，再向拒绝支付代价的人追债。",
+    tagline: "震惊！高中刚毕业的小伙竟被卖去恶魔开创的公司，这究竟是道德的沦丧？",
     summary:
       "恶魔公司负责把契约变成生意。客户得到力量，按约支付代价；拒绝支付时，行动小队上门回收。手续完整，分工明确，由心灵恶魔经营的家族企业对此已经非常熟练。\n\n" +
       "维托负责指挥固定四人组。洛伦佐是被迫签约时意外觉醒的吸血鬼，前特种兵不借用任何恶魔的力量，队里最年轻的成年人则能把水杯、插座和门锁排列成一场严重事故。\n\n" +
@@ -182,7 +184,7 @@ const STORY_ARCS = [
     id: "shaxia-prequel",
     code: "A-007",
     title: "沙夏前传",
-    tagline: "排名决定价值，依赖被称作归属，疼痛则被包装成成长。",
+    tagline: "排名决定价值，扭曲的人格成为依赖，疼痛则被包装成成长。",
     summary:
       "红桃市的『学校』用排名决定价值。学生被持续观察、惩罚和开发，再按照结果分成可培养、可使用与可淘汰的人；他们痛苦，也依赖这里，因为学校是唯一会把缺陷称作才能的地方。\n\n" +
       "沙夏在无数视线里学会先戴好面具。久世零央作为朋友带她看见外界，又作为研究者把她推向足以跨越永生的形态；治疗、赞许、监管、时间与复制人格，也都能在这里成为控制。\n\n" +
@@ -193,7 +195,7 @@ const STORY_ARCS = [
     id: "parallel-world-story",
     code: "A-008",
     title: "平行世界的故事",
-    tagline: "隔壁平行世界的一个紫色的神——如果她在，主世界观里『地球的神失踪』的事就不会发生。",
+    tagline: "原本应该有的故事，也是不会结束的故事。",
     summary:
       "与主世界相邻的地方，存在一位紫色的神。\n\n" +
       "如果她也在那里，蓝色的人便不会因抢救本源分支而重伤、失忆，也不会跌进人类社会。那是一条知道结果以后才显得近在咫尺的幸福分支。\n\n" +
@@ -204,8 +206,8 @@ const STORY_ARCS = [
   {
     id: "red-heart-corporate",
     code: "A-009",
-    title: "红桃市公司线（暂名）",
-    tagline: "一个被家人真心爱护的技术宅，从公司前辈身上第一次看见家族产业的黑暗面。",
+    title: "幽灵是存在的",
+    tagline: "这纯粹是我cp瘾犯了",
     summary:
       "程见微被家人安排进入公司基层。他没有失宠，也不需要争夺继承权；父亲和作为继承人的兄长都真心爱他，负责带他的沈怀川看起来也足够耐心。\n\n" +
       "沈怀川是一名职业杀手。接近、照顾与诱惑都服务于同一个目标：借程见微抵达程父身边。与此同时，他以为早已死亡的妹妹沈照棠仍在营养舱里呼吸；另一个自称照棠的人格，则已经在他的身体里生活了很久。\n\n" +
@@ -227,7 +229,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "初瞑",
-    role: "在九日毕业倒计时中反复醒来的问题学生",
+    role: "你是否还记得冥王星，冥王星不在意未来",
     portrait: "images/approved-chuming.png",
     origin: "本源为『神秘』『未知』",
     quickFacts: [
@@ -246,7 +248,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "蓝色的人",
-    role: "总在图书馆替别人寻找答案的蓝发少女",
+    role: "为什么天空和海洋是蓝色？",
     portrait: "images/approved-lanse-de-ren.png",
     gallery: ["images/lanse-de-ren-2.jpg"],
     origin: "本源为知识、智慧",
@@ -269,7 +271,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "墨丘·利兰德",
-    role: "把校规和世界都当成逻辑题的优等生",
+    role: "事情异常离奇，而你称它为悖论",
     portrait: "images/approved-moqiu.png",
     origin: "本源为悖论、逻辑的缺口、愚弄",
     quickFacts: [
@@ -288,7 +290,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "火焱",
-    role: "把亲近与危险都表达得过分直接的红发少女",
+    role: "她爱你，爱你的每一个组成，可到底什么是爱？",
     portrait: "images/approved-huoyan.png",
     gallery: ["images/huoyan-2.jpg"],
     origin: "本源为爱和血，繁衍和杀戮",
@@ -308,7 +310,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "金鑫",
-    role: "习惯替所有人规定正确答案的娇小学生",
+    role: "没有规则，不成方圆",
     portrait: "images/approved-jinxin.png",
     origin: "本源为律法、裁定",
     quickFacts: [
@@ -328,7 +330,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "远天",
-    role: "把秩序理解为必须握在自己手里的高位学生",
+    role: "我睁开眼睛，随后世界为我而诞生",
     portrait: "images/approved-yuantian.png",
     gallery: ["images/yuantian-2.jpg"],
     origin: "本源为权利、支配",
@@ -348,7 +350,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "reincarnation-academy",
     name: "深海",
-    role: "总在远天身后安静观察潮向的学生",
+    role: "沉默比一切都能解决问题，至少他这么认为",
     portrait: "images/approved-shenhai.png",
     origin: "",
     quickFacts: [
@@ -365,7 +367,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "modern-cities",
     name: "影蝶或",
-    role: "长期请病假，却什么消息都比别人早知道的少女",
+    role: "让我上学不如让我去死",
     portrait: "images/approved-yingdiehuo.png",
     gallery: ["images/yingdiehuo.jpg"],
     origin: "",
@@ -385,7 +387,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "modern-cities",
     name: "如月蜻蛉",
-    role: "没有过去，却比谁都擅长学会人类生活的少女",
+    role: "没有记忆，只记得自己并非人类",
     portrait: "images/approved-ruyue-qingling-v2.png",
     gallery: ["images/ruyue-qingling.jpg"],
     origin: "蓝色创世神本人；原本源与知识、娱乐相关",
@@ -405,7 +407,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "modern-cities",
     name: "雨宫黛",
-    role: "总能照顾好所有人，却不太会放过自己的优等生",
+    role: "完美的阳光美少女！除了她自己都这么认为",
     portrait: "images/approved-yugong-dai.png",
     gallery: ["images/yugong-dai.jpg"],
     origin: "",
@@ -426,7 +428,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "modern-cities",
     name: "沙夏",
-    role: "从封闭学校逃出来、暂住方片市的寡言少女",
+    role: "从其他城市逃来的社会闲散人员",
     portrait: "images/approved-shaxia.png",
     gallery: ["images/shaxia.jpg", "images/shaxia-2.jpg"],
     origin: "",
@@ -445,8 +447,8 @@ const CHARACTERS = [
     id: "white-shaxia",
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
-    name: "白发沙夏",
-    role: "在另一条时间线上不断赶路的白发旅人",
+    name: "沙夏（白）",
+    role: "你熟悉的沙夏..但有什么不对",
     portrait: "images/approved-white-shaxia.png",
     gallery: ["images/white-shaxia-reference.jpg"],
     origin: "继承风神之力，神之台阶一阶",
@@ -467,7 +469,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "久世零央",
-    role: "在许多年代留下同一个名字的学校研究员",
+    role: "永生是个诅咒",
     portrait: "images/approved-kuze-reio.png",
     origin: "永生机制与年龄未确认",
     quickFacts: [
@@ -487,7 +489,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "真白",
-    role: "相信只要能够治好，伤害便没有真正发生的治疗系学生",
+    role: "无论发生什么，她会把你“治好”",
     portrait: "images/approved-mashiro.png",
     gallery: ["images/healer-disciple-reference.jpg"],
     origin: "姓名已确认为真白；治疗规则细节待定",
@@ -508,7 +510,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "莱昂·维尔德",
-    role: "总能让课堂先安静下来，再决定谁该被雷声点名的教师",
+    role: "不是称职的教师，也不是合格的人",
     portrait: "images/approved-leon-wilde.png",
     origin: "姓名已确认为莱昂·维尔德；过去待定",
     quickFacts: [
@@ -528,7 +530,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "神乐缀",
-    role: "把每一次注视都变成舞台的高位学生",
+    role: "把每一次注视都变为舞台",
     portrait: "images/approved-kagura-tsuzuri.png",
     origin: "姓名与外貌已确认；核心能力尚未确认",
     quickFacts: [
@@ -549,7 +551,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "尤利安·塞维尔",
-    role: "带着水银义肢、在监管期限内重返学校的前危险人物",
+    role: "信奉天赋，却又受困于没有天赋",
     portrait: "images/approved-julian-sevier.png",
     origin: "姓名已确认为尤利安·塞维尔；年龄、动机与能力边界待定",
     quickFacts: [
@@ -569,7 +571,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "伏见巡",
-    role: "擅长把一小段时间和自己一起藏起来的学生",
+    role: "当你拥有无限的时间会干什么？答：玩游戏",
     portrait: "images/approved-fushimi-jun-v2.png",
     origin: "红桃市学校",
     quickFacts: [["性别", "男性，已成年"], ["能力", "在封闭区域内控制时间流速"], ["外貌", "半褪色黄发、圈状发髻、宽松衣着"]],
@@ -583,7 +585,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "shaxia-prequel",
     name: "众人",
-    role: "坐在轮椅上，却能同时把许多条可能性算到底的学生",
+    role: "请把我心中的鬼驱赶，不然我看谁都是恶鬼模样",
     portrait: "images/approved-shujin.png",
     origin: "红桃市学校；在方片市活动",
     quickFacts: [["身体", "瘦弱女性学生，长期使用轮椅"], ["能力", "海量并行思考、推演与预判"], ["分身", "朵拉蒸馏出的网络人格复制体，并非原意识上传"]],
@@ -598,7 +600,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "tangled-consequences",
     name: "稣德",
-    role: "在纯白圣教中被要求永远正确的年轻领袖",
+    role: "纯白圣教圣子，受制于神明的提线木偶",
     portrait: "images/approved-sude-v2.png",
     origin: "",
     quickFacts: [
@@ -618,7 +620,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "tangled-consequences",
     name: "卢克·马菲",
-    role: "总能让子弹和谈判一起抵达自己答案的地下首领",
+    role: "操纵因果，因果也都找上了他",
     portrait: "images/approved-luke.png",
     origin: "",
     quickFacts: [
@@ -638,7 +640,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "tangled-consequences",
     name: "云平",
-    role: "从街头带着一群人打出新规矩的年轻头领",
+    role: "方片前领袖，已逝",
     portrait: "images/approved-yunping-v4.png",
     origin: "",
     quickFacts: [
@@ -660,7 +662,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "resurrection-horror",
     name: "伽拉忒亚",
-    role: "在世界最深处持续创作的造化之胎",
+    role: "痛苦催生创作，而我从未停止创作",
     portrait: "images/approved-galatea-v2.png",
     hiddenFromRoster: true,
     origin: "创世神的原始造物；朵拉的姐姐",
@@ -676,7 +678,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "resurrection-horror",
     name: "朵拉",
-    role: "以同一张面孔出现在黑桃市每块屏幕里的万能 AI",
+    role: "你的万事小助手",
     portrait: "images/approved-dora.png",
     origin: "全知之书·潘朵拉贡；伽拉忒亚的妹妹",
     quickFacts: [["职责", "维持虚拟日常、管理鬼城与副本"], ["能力边界", "可蒸馏复制人格，借姐姐领域完成真正上传"], ["情感", "没有人类情感，以任务逻辑行动"]],
@@ -692,7 +694,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "resurrection-horror",
     name: "全知之书·潘朵拉贡",
-    role: "为生命提供全部知识蓝本的原始造物",
+    role: "全知全能中的全知，记载一切的全知之书，神造之物",
     portrait: "images/approved-pandoragon-v2.png",
     hiddenFromRoster: true,
     origin: "蓝色创世神制造的原始造物；造化之胎·伽拉忒亚的妹妹",
@@ -708,7 +710,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "resurrection-horror",
     name: "林忆",
-    role: "总是先听完别人的话，再决定该相信哪一部分的心理系学生",
+    role: "为了理想，去欺骗",
     portrait: "images/approved-lin-yi-v4.png",
     origin: "黑桃市最大地下黑帮林家",
     quickFacts: [["外貌", "白色长发松散马尾、绿色眼睛、米色风衣"], ["公开身份", "大学心理学系学生"], ["前史", "晚于苏浮生入场，曾崇拜生前的她"]],
@@ -722,8 +724,8 @@ const CHARACTERS = [
     id: "first-dungeon-killer",
     worldId: "cosmos-mythos",
     storyArcId: "resurrection-horror",
-    name: "第一副本连环杀人魔",
-    role: "把追杀当作邀约、把危险当作乐趣的副本玩家",
+    name: "瓦利亚·罗扎诺夫",
+    role: "杀人是爱好不是职业",
     portrait: "images/approved-first-dungeon-killer-v3.png",
     origin: "现实身份与姓名待定",
     quickFacts: [["性别", "年轻男性，已成年"], ["外貌", "金色短妹妹头，染有大量细缕彩色挑染；长睫毛"], ["性格", "张扬、疯狂，享受危险与互相威胁"], ["关系", "与融合后苏浮生危险暧昧、互有杀意"], ["结局", "现实肉体被杀，意识永久困在鬼城"]],
@@ -738,7 +740,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "demon-hunter",
     name: "杞令芊",
-    role: "在梅花市用影子替人收拾夜间麻烦的年轻猎魔人",
+    role: "守门巫女，预言之子，史上最强和现代最强猎魔人",
     portrait: "images/approved-qilingqian-v2.png",
     origin: "人类；预言之子与守门巫女双传承者",
     quickFacts: [["年龄", "已满18岁，具体年龄待定"], ["职业", "驱魔师／影系猎魔人"], ["能力", "暗影附着、穿梭、操控；开门与预言"], ["灰色毛领外套", "前辈死后留下、由她继续穿着的遗物"]],
@@ -752,8 +754,8 @@ const CHARACTERS = [
     id: "qilingqian-senior",
     worldId: "cosmos-mythos",
     storyArcId: "demon-hunter",
-    name: "杞令芊的前辈",
-    role: "总爱在任务后纠正杞令芊握刀角度的冰系前辈",
+    name: "岑白",
+    role: "杞令芊的前辈兼师傅，已逝",
     portrait: "images/approved-qilingqian-senior-v3.png",
     origin: "姓名待定；大学生年龄；黑发蓝眼",
     quickFacts: [["年龄", "20—22岁，大学生"], ["外貌", "冷白皮、黑发蓝眼、凌乱上翘短发"], ["能力", "冰系魔法"], ["灰色毛领外套", "原本属于他，死后由杞令芊继承"], ["现状", "被黑龙击败，枝桠贯穿而死"]],
@@ -767,7 +769,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "demon-company",
     name: "洛伦佐·罗萨",
-    role: "拒绝签约后，反而留在恶魔公司上班的麻烦新人",
+    role: "高中毕业就被卖给黑心公司的打工仔",
     portrait: "images/approved-lorenzo-rosa.png",
     origin: "未签恶魔契约；觉醒吸血鬼血脉",
     quickFacts: [["年龄", "刚高中毕业，已成年"], ["外貌", "浅金长发、红与浅青蓝异色瞳"], ["性格", "跳脱、活泼、爱闯祸；同性恋"]],
@@ -782,7 +784,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "demon-company",
     name: "维托·门蒂",
-    role: "负责把四个麻烦人物的意识接到一起的队长",
+    role: "负责管理三个麻烦人物的队长",
     portrait: "images/approved-vito-menti.png",
     origin: "公司老板之子；家族与心灵恶魔签约",
     quickFacts: [["能力", "读心、心灵感应、行动预判"], ["外貌", "红色高马尾、荧光黄绿挑染、绿眼镜"], ["定位", "严厉负责的辅助与指挥者"]],
@@ -796,8 +798,8 @@ const CHARACTERS = [
     id: "devil-corp-veteran",
     worldId: "cosmos-mythos",
     storyArcId: "demon-company",
-    name: "前特种兵队员",
-    role: "不用契约，也能把恶魔公司的任务做完的前特种兵",
+    name: "阿德里安·科斯塔",
+    role: "什么叫技能点全加物理了？",
     portrait: "images/approved-devil-corp-veteran-v3.png",
     origin: "曾服役于特种部队",
     quickFacts: [["年龄", "不超过25岁"], ["外貌", "冷白皮、黑发、眯眯眼，身形修长精悍"], ["性格", "平和稳重、可靠的大哥哥"]],
@@ -810,8 +812,8 @@ const CHARACTERS = [
     id: "accident-contractor",
     worldId: "cosmos-mythos",
     storyArcId: "demon-company",
-    name: "微小事故契约者",
-    role: "脾气总比事故先一步发生的年轻契约者",
+    name: "尼科·贝利尼",
+    role: "别惹他，他很易怒，然后会有坏事发生",
     portrait: "images/approved-accident-contractor.png",
     origin: "与微小事故恶魔签约",
     quickFacts: [["年龄", "已满18岁，队内明显年幼"], ["性格", "暴躁、早熟"], ["能力", "操纵日用品与电器，编排连锁意外"]],
@@ -825,7 +827,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "resurrection-horror",
     name: "苏浮生",
-    role: "失去过去以后，被系统作为预备玩家重新邀请的女人",
+    role: "浮生，复生，活过来的究竟是谁？",
     portrait: "images/approved-su-fusheng-v2.png",
     gallery: ["images/su-fusheng.jpg"],
     origin: "约三成原苏浮生、七成造化之胎·伽拉忒亚",
@@ -846,7 +848,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "red-heart-corporate",
     name: "程见微",
-    role: "被家里安排从基层做起、顺手替同事修电脑的新人",
+    role: "哇，同事过了几个月变公司董事了",
     portrait: "images/approved-cheng-jianwei.png",
     origin: "红桃市富裕家族",
     quickFacts: [["性别", "男性，已成年"], ["性格", "内向、宅、聪明的技术型人格"], ["家庭", "父亲与继承人兄长真心爱护他"]],
@@ -861,7 +863,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "red-heart-corporate",
     name: "沈怀川",
-    role: "在公司里教新人做事，也在等待另一个机会的前辈",
+    role: "职业杀手，白天是社畜，晚上也是",
     portrait: "images/approved-shen-huaichuan.png",
     origin: "与沈照棠为兄妹",
     quickFacts: [["性别", "男性，已成年"], ["外貌", "米色头发"], ["目的", "利用程见微接近并刺杀程父"]],
@@ -876,7 +878,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "red-heart-corporate",
     name: "沈照棠",
-    role: "长久沉睡，却仍以自己的方式守在哥哥身边的少女",
+    role: "你是真实存在的人，还是一个人格？",
     portrait: "images/approved-shen-zhaotang.png",
     origin: "沈怀川的亲妹妹",
     quickFacts: [["性别", "女性，已成年"], ["状态", "长期昏迷，结局获救"], ["天赋", "杀手天赋远高于哥哥"]],
@@ -890,7 +892,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "red-heart-corporate",
     name: "程家长子",
-    role: "无论在家里还是公司，都表现得挑不出错的程家继承人",
+    role: "比较不重要的一个完美儿子",
     portrait: "images/approved-cheng-elder-brother.png",
     origin: "程见微的兄长",
     quickFacts: [["外貌", "金发碧眼"], ["家庭", "真心爱护并支持弟弟"], ["知情", "知道并接受家族秘密培养杀手"]],
@@ -905,7 +907,7 @@ const CHARACTERS = [
     worldId: "cosmos-mythos",
     storyArcId: "parallel-world-story",
     name: "梦楽咲希",
-    role: "来自相邻可能世界、对这里保持安静观察的紫色神明",
+    role: "最原始的oc，最美好的时间线。",
     portrait: "images/approved-meng-le-zhaoxi-v3.png",
     origin: "",
     quickFacts: [

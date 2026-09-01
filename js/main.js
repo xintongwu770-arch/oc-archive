@@ -138,7 +138,7 @@ function renderWorldGrid(container) {
       [
         el("div", { class: "world-id", text: w.code || w.id }),
         el("h3", { text: w.title }),
-        el("p", { text: w.summary || w.tagline || "" }),
+        el("p", w.taglineHtml ? { html: w.taglineHtml } : { text: w.tagline || "" }),
         el("div", { class: "world-meta" }, [
           el("span", { text: metaRight }),
           el("span", { text: `更新于 ${w.updatedAt || "—"}` }),
@@ -212,7 +212,7 @@ function renderCharacterArchive(container) {
     section.appendChild(
       el("div", { class: "arc-section-header" }, [
         el("h2", { text: arc.title }),
-        el("p", { text: arc.tagline || "" }),
+        el("p", arc.taglineHtml ? { html: arc.taglineHtml } : { text: arc.tagline || "" }),
       ])
     );
     const grid = el("div", { class: "char-grid" });
@@ -300,7 +300,7 @@ function renderStoryArcCatalog(container) {
     const card = el("a", { class: `world-card arc-catalog-card faction-${factionOfArc(arc.id)} cosmic-block${arc.placeholder ? " world-card-placeholder" : ""}`, href: `arc.html?id=${arc.id}` }, [
         el("div", { class: "world-id", text: arc.code || arc.id }),
         el("h3", { text: arc.title }),
-        el("p", { text: arc.summary || arc.tagline || "" }),
+        el("p", arc.taglineHtml ? { html: arc.taglineHtml } : { text: arc.tagline || "" }),
         el("div", { class: "world-meta" }, [
           el("span", { text: `${charCount} 位角色 · ${count} 篇故事` }),
           el("span", { text: `更新于 ${arc.updatedAt || "—"}` }),
