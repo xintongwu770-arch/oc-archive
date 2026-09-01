@@ -844,7 +844,7 @@ const CHARACTERS = [
     storyArcId: "red-heart-corporate",
     name: "程见微",
     role: "哇，同事过了几个月变公司董事了",
-    portrait: "images/approved-cheng-jianwei-v2.png",
+    portrait: "images/approved-cheng-jianwei-v3.png",
     origin: "红桃市富裕家族",
     quickFacts: [["性别", "男性，已成年"], ["性格", "内向、宅、聪明的技术型人格"], ["家庭", "父亲与继承人兄长真心爱护他"]],
     bio:
