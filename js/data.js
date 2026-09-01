@@ -844,7 +844,7 @@ const CHARACTERS = [
     storyArcId: "red-heart-corporate",
     name: "程见微",
     role: "哇，同事过了几个月变公司董事了",
-    portrait: "images/approved-cheng-jianwei.png",
+    portrait: "images/approved-cheng-jianwei-v2.png",
     origin: "红桃市富裕家族",
     quickFacts: [["性别", "男性，已成年"], ["性格", "内向、宅、聪明的技术型人格"], ["家庭", "父亲与继承人兄长真心爱护他"]],
     bio:
@@ -859,7 +859,7 @@ const CHARACTERS = [
     storyArcId: "red-heart-corporate",
     name: "沈怀川",
     role: "职业杀手，白天是社畜，晚上也是",
-    portrait: "images/approved-shen-huaichuan.png",
+    portrait: "images/approved-shen-huaichuan-v2.png",
     origin: "与沈照棠为兄妹",
     quickFacts: [["性别", "男性，已成年"], ["外貌", "米色头发"], ["目的", "利用程见微接近并刺杀程父"]],
     bio:
@@ -874,7 +874,7 @@ const CHARACTERS = [
     storyArcId: "red-heart-corporate",
     name: "沈照棠",
     role: "你是真实存在的人，还是一个人格？",
-    portrait: "images/approved-shen-zhaotang.png",
+    portrait: "images/approved-shen-zhaotang-v2.png",
     origin: "沈怀川的亲妹妹",
     quickFacts: [["性别", "女性，已成年"], ["状态", "长期昏迷，结局获救"], ["天赋", "杀手天赋远高于哥哥"]],
     bio:
