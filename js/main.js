@@ -169,10 +169,10 @@ function renderWorldDetail() {
     el("span", {}, [el("a", { href: "index.html", text: "首页" }), " / ", world.title])
   );
 
-  const isCity = (world.id.startsWith("city-") || world.id === "ocean") && world.illustration;
+  const isCity = Boolean(world.illustration);
   if (isCity) document.body.classList.add("city-world-page");
 
-  // 四城使用沉浸式全屏封面；其他世界观保留档案式 banner。
+  // 所有世界观与地区共用沉浸式全屏封面。
   const bannerChildren = [
     el("div", { class: "world-banner-eyebrow", text: world.code || "" }),
     el("h1", { text: world.title }),
