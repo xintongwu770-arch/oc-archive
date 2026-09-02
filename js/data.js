@@ -851,7 +851,7 @@ const CHARACTERS = [
     storyArcId: "demon-company",
     name: "阿德里安·科斯塔",
     role: "什么叫技能点全加物理了？",
-    portrait: "images/approved-devil-corp-veteran-v3.png",
+    portrait: "images/approved-devil-corp-veteran-v4.png",
     origin: "曾服役于特种部队",
     quickFacts: [["年龄", "不超过25岁"], ["外貌", "冷白皮、黑发、眯眯眼，身形修长精悍"], ["性格", "平和稳重、可靠的大哥哥"]],
     bio:
@@ -865,13 +865,13 @@ const CHARACTERS = [
     storyArcId: "demon-company",
     name: "尼科·贝利尼",
     role: "别惹他，他很易怒，然后会有坏事发生",
-    portrait: "images/approved-accident-contractor.png",
+    portrait: "images/approved-accident-contractor-v2.png",
     origin: "与微小事故恶魔签约",
-    quickFacts: [["年龄", "已满18岁，队内明显年幼"], ["性格", "暴躁、早熟"], ["能力", "操纵日用品与电器，编排连锁意外"]],
+    quickFacts: [["年龄", "未成年，具体年龄待定"], ["外貌", "冰蓝色短发、金色眼睛"], ["性格", "暴躁、早熟"], ["能力", "操纵日用品与电器，编排连锁意外"]],
     bio:
       "他与『微小事故』签了契约。插座短路，水杯倾倒，门锁在不合适的时候卡住——每件事单独看都不值得在意，被他依次排列以后，却足以把一个人送进无法挽回的结果。\n\n" +
-      "他已经成年，只是站在其他队员旁边仍显得年幼。别人因此叫他小男孩时，他通常会先发火。姓名、契约代价与入职原因仍未确认。",
-    traits: ["微小事故", "连锁意外", "暴躁早熟", "讨厌被当小孩"],
+      "他确实还是个小孩，却最讨厌别人因此看轻他。谁把年幼误认为无害，谁就很可能成为下一场意外的起点。契约代价与入职原因仍未确认。",
+    traits: ["微小事故", "连锁意外", "冰蓝短发", "暴躁早熟"],
   },
   {
     id: "su-fusheng",
