@@ -993,6 +993,7 @@ const RELATIONS = [
   { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "jinxin", label: "可以一起喝茶的好朋友", directed: true },
   { storyArcId: "cross-arc", from: "lanse-de-ren", to: "galatea", label: "做得太仓促了，不需要了", directed: true, revealHidden: true },
   { storyArcId: "cross-arc", from: "lanse-de-ren", to: "dora", label: "很尽职尽责，不过暂时不需要了", directed: true },
+  { storyArcId: "cross-arc", from: "dora", to: "shujin", label: "为她制作电子分身；由于众人不在姐姐的领域内，分身只是人格蒸馏复制体，并非真正的意识上传", directed: true },
 
   { storyArcId: "modern-cities", from: "yingdiehuo", to: "ruyue-qingling", label: "同居，她对影蝶或的传闻很感兴趣" },
   { storyArcId: "modern-cities", from: "yugong-dai", to: "shaxia", label: "深夜网友（雨宫黛并不知道对方真实身份就是沙夏）" },
