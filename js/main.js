@@ -25,7 +25,12 @@ function arcById(id) { return STORY_ARCS.find((a) => a.id === id); }
 function charById(id) { return CHARACTERS.find((c) => c.id === id); }
 function isRosterVisible(c) { return c && !c.hiddenFromRoster; }
 function charsOfArc(arcId) { return CHARACTERS.filter((c) => c.storyArcId === arcId && isRosterVisible(c)); }
-function relationsOfArc(arcId) { return RELATIONS.filter((r) => r.storyArcId === arcId && isRosterVisible(charById(r.from)) && isRosterVisible(charById(r.to))); }
+function relationsOfArc(arcId) { return RELATIONS.filter((r) => r.storyArcId === arcId && (r.revealHidden || (isRosterVisible(charById(r.from)) && isRosterVisible(charById(r.to))))); }
+function charsForRelationGraph(arcId) {
+  const relations = relationsOfArc(arcId);
+  const ids = new Set([...charsOfArc(arcId).map((c) => c.id), ...relations.flatMap((r) => [r.from, r.to])]);
+  return [...ids].map(charById).filter(Boolean);
+}
 function storiesOfArc(arcId) { return STORIES.filter((s) => s.storyArcId === arcId); }
 function factionOfArc(arcId) {
   return ({
@@ -204,7 +209,7 @@ function renderCharacterArchive(container) {
   const selectedFaction = qsParam("faction");
   STORY_ARCS.forEach((arc) => {
     if (selectedFaction && factionOfArc(arc.id) !== selectedFaction) return;
-    const chars = charsOfArc(arc.id);
+    const chars = charsForRelationGraph(arc.id);
     if (chars.length === 0) return;
     const faction = factionOfArc(arc.id);
     const section = el("section", { id: `arc-${arc.id}`, class: `arc-section faction-${faction}` });
@@ -441,7 +446,7 @@ function renderArcRelations() {
       "角色关系",
     ])
   );
-  renderRelationGraph(root, charsOfArc(arc.id), relationsOfArc(arc.id));
+  renderRelationGraph(root, charsForRelationGraph(arc.id), relationsOfArc(arc.id));
 }
 
 /* ---------- 故事线专属：短打/故事子页 ---------- */
@@ -620,7 +625,7 @@ function renderRelationGraph(container, chars, relations) {
         el("div", { class: "relation-record-pair" }, [
           el("img", { src: from.portrait, alt: "", loading: "lazy", decoding: "async" }),
           el("span", { text: from.name }),
-          el("i", { text: "×" }),
+          el("i", { text: rel.directed ? "→" : "×" }),
           el("img", { src: to.portrait, alt: "", loading: "lazy", decoding: "async" }),
           el("span", { text: to.name }),
         ]),
@@ -650,6 +655,24 @@ function renderRelationGraph(container, chars, relations) {
 }
 
 /* ---------- 角色详情页 ---------- */
+function renderDossierSection(section) {
+  const body = el("div", { class: "dossier-section-body" });
+  (section.content || []).forEach((text) => body.appendChild(el("p", { text })));
+  if (section.items?.length) {
+    body.appendChild(el("dl", { class: "dossier-grid" }, section.items.flatMap(([key, value]) => [
+      el("dt", { text: key }), el("dd", { text: value }),
+    ])));
+  }
+  const className = `dossier-section${section.wide ? " is-wide" : ""}${section.classified ? " is-classified" : ""}`;
+  if (section.classified) {
+    return el("details", { class: className }, [
+      el("summary", {}, [el("span", { text: section.title }), el("small", { text: "点击解密" })]),
+      body,
+    ]);
+  }
+  return el("article", { class: className }, [el("h2", { text: section.title }), body]);
+}
+
 function renderCharacterDetail() {
   const id = qsParam("id");
   const c = charById(id);
@@ -709,6 +732,10 @@ function renderCharacterDetail() {
         ),
       ])
     );
+  }
+
+  if (c.sections?.length) {
+    root.appendChild(el("div", { class: "char-dossier" }, c.sections.map(renderDossierSection)));
   }
 
   if (c.bio) {
