@@ -1007,7 +1007,6 @@ const RELATIONS = [
   { storyArcId: "shaxia-prequel", from: "lightning-teacher", to: "performer-disciple", label: "互相强化但权力不对等的师徒关系" },
   { storyArcId: "shaxia-prequel", from: "lightning-teacher", to: "mercury-prisoner", label: "魔法部授权监管逐渐滑向私人控制" },
   { storyArcId: "shaxia-prequel", from: "white-shaxia", to: "kuze-reio", label: "计划成功的证明，也是那套培养方法最惨烈的反证" },
-  { storyArcId: "shaxia-prequel", from: "dora", to: "shujin", label: "跨城人格蒸馏合作；以复制体伪装成真正上传的本人思维" },
   { storyArcId: "shaxia-prequel", from: "shaxia", to: "shujin", label: "追杀与反追杀；沙夏曾刺中被电子分身覆盖的错误载体" },
   { storyArcId: "resurrection-horror", from: "dora", to: "galatea", label: "姐妹与创世分工；知识蓝本和现实创造的组合" },
   { storyArcId: "resurrection-horror", from: "dora", to: "su-fusheng", label: "以适者筛选将她送至最深处，并在融合后伪装成新玩家重新投放" },
