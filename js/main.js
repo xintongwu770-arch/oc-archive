@@ -283,6 +283,16 @@ function renderRelationsPage(container) {
     renderRelationGraph(section, chars, relationsOfArc(arc.id));
     container.appendChild(section);
   });
+  const crossRelations = relationsOfArc("cross-arc");
+  if (crossRelations.length && !selectedFaction) {
+    const section = el("div", { class: "arc-section" });
+    section.appendChild(el("div", { class: "arc-section-header" }, [
+      el("h2", { text: "跨故事线关系" }),
+      el("p", { text: "这些关系连接不同时间、身份与故事，不改变角色原本的故事归属。" }),
+    ]));
+    renderRelationGraph(section, charsForRelationGraph("cross-arc"), crossRelations);
+    container.appendChild(section);
+  }
 }
 
 /* ---------- 故事目录页：按故事线列出卡片，点进去到 arc.html ---------- */

@@ -981,7 +981,7 @@ const CHARACTERS = [
    ---------------------------------------------------------- */
 const RELATIONS = [
   { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "chuming", label: "想要复活", directed: true },
-  { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "meng-le-zhaoxi", label: "你不是她，但很有趣", directed: true },
+  { storyArcId: "cross-arc", from: "lanse-de-ren", to: "meng-le-zhaoxi", label: "你不是她，但很有趣", directed: true },
   { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "yuantian", label: "讨厌", directed: true },
   { storyArcId: "reincarnation-academy", from: "chuming", to: "moqiu", label: "曾在个人线中屠杀全校，后来向初瞑保证不会再犯" },
   { storyArcId: "reincarnation-academy", from: "chuming", to: "yuantian", label: "远天因嫉妒与忌惮图谋杀害初瞑" },
@@ -991,8 +991,8 @@ const RELATIONS = [
   { storyArcId: "reincarnation-academy", from: "yuantian", to: "shenhai", label: "深海是远天沉默的跟班" },
   { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "huoyan", label: "可以一起喝茶的好朋友", directed: true },
   { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "jinxin", label: "可以一起喝茶的好朋友", directed: true },
-  { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "galatea", label: "做得太仓促了，不需要了", directed: true, revealHidden: true },
-  { storyArcId: "reincarnation-academy", from: "lanse-de-ren", to: "dora", label: "很尽职尽责，不过暂时不需要了", directed: true },
+  { storyArcId: "cross-arc", from: "lanse-de-ren", to: "galatea", label: "做得太仓促了，不需要了", directed: true, revealHidden: true },
+  { storyArcId: "cross-arc", from: "lanse-de-ren", to: "dora", label: "很尽职尽责，不过暂时不需要了", directed: true },
 
   { storyArcId: "modern-cities", from: "yingdiehuo", to: "ruyue-qingling", label: "同居，她对影蝶或的传闻很感兴趣" },
   { storyArcId: "modern-cities", from: "yugong-dai", to: "shaxia", label: "深夜网友（雨宫黛并不知道对方真实身份就是沙夏）" },
