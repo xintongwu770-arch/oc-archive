@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#111a21" />
+    <title>鱿鱼的 OC · 档案工作台预览</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到内容</a>
+    <aside id="sidebar"></aside>
+    <div class="shell">
+      <header class="topbar">
+        <button id="menu" aria-label="展开目录" aria-expanded="false">☰</button
+        ><a class="crumb" href="#home">鱿鱼的世界 / 档案馆</a
+        ><label class="search"
+          ><span>⌕</span
+          ><input
+            id="search"
+            type="search"
+            placeholder="搜索角色、故事、设定…"
+            aria-label="全站搜索" /></label
+        ><button id="mode">作者工作台</button>
+      </header>
+      <div id="notice" role="status" aria-live="polite"></div>
+      <main id="main" tabindex="-1"></main>
+      <footer>
+        OC ARCHIVE · 预览版 <a href="../index.html">返回原网站 ↗</a>
+      </footer>
+    </div>
+    <dialog id="editor"><form id="edit-form"></form></dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
