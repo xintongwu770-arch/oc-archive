@@ -278,42 +278,32 @@ function home() {
   );
 }
 function worlds() {
-  main.append(
-    header("世界与城市", "地球、四座城市，以及无人知晓的海洋。", [
-      addButton("worlds"),
-    ]),
-    E(
-      "div",
-      { class: "grid book-grid" },
-      data.worlds
-        .filter((x) => editing || vis(x))
-        .map((w) =>
-          E(
-            "a",
-            { href: "#world/" + w.id, class: "card book" },
-            image(w.illustration, ""),
-            E(
-              "div",
-              {},
-              E("small", {}, w.code),
-              E("h3", {}, w.title),
-              E("p", {}, w.tagline),
-            ),
-          ),
-        ),
-    ),
-  );
+  const first = data.worlds.find((w) => editing || vis(w));
+  if (!first) return main.append(header("世界与城市", "", [addButton("worlds")]));
+  world(first.id);
 }
 function world(id) {
   const w = data.worlds.find((x) => x.id === id);
-  if (!w) return missing();
+  if (!w || (!editing && !vis(w))) return missing();
+  main.classList.add("world-view");
+  const art = image(w.illustration, "", "world-art");
+  art.loading = "eager";
   main.append(
-    header(w.title, "", [editButton("worlds", w)]),
     E(
       "section",
-      { class: "region" },
-      image(w.illustration, ""),
-      E("div", { class: "prose" }, paragraph(w.summary || w.tagline)),
+      { class: "world-stage", "aria-label": w.title },
+      art,
+      E("div", { class: "world-copy" },
+        E("small", { class: "world-eyebrow" }, "世界与城市 / " + (w.code || "")),
+        E("h1", {}, w.title),
+        E("div", { class: "prose" }, paragraph(w.summary || w.tagline)),
+        E("div", { class: "world-tools" }, editButton("worlds", w), addButton("worlds")),
+      ),
+      E("nav", { class: "world-switcher", "aria-label": "切换世界与城市" },
+        data.worlds.filter((x) => editing || vis(x)).map((x) =>
+          E("a", { href: "#world/" + x.id, "aria-current": x.id === id ? "page" : "false" },
+            E("small", {}, x.code), E("span", {}, x.title))),
+      ),
     ),
   );
 }
@@ -1030,6 +1020,7 @@ function missing() {
 }
 function render() {
   main.replaceChildren();
+  main.classList.remove("world-view");
   sidebar();
   $("#mode").textContent = editing
     ? "退出编辑"
